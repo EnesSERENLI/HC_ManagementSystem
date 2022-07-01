@@ -17,8 +17,9 @@ namespace HC.Domain.Entities.Concrete
         }
         public Guid ID { get; set; }
         public string FullName { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         public string ImagePath { get; set; }
+        public string Address { get; set; }
 
         public Status Status { get; set; }
         public DateTime? CreatedDate { get; set; }

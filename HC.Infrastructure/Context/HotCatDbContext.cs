@@ -1,4 +1,6 @@
-﻿using HC.Domain.Entities.Concrete;
+﻿using HC.Application.Extensions;
+using HC.Domain.Entities.Concrete;
+using HC.Domain.Entities.Interface;
 using HC.Infrastructure.Mapping.Concrete;
 using HC.Infrastructure.SeedData;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -42,6 +44,49 @@ namespace HC.Infrastructure.Context
             builder.ApplyConfiguration(new AppUserMap());
 
             base.OnModelCreating(builder);
+        }
+
+        public override int SaveChanges()
+        {
+            var modifiedEntities = ChangeTracker.Entries()
+                .Where(x=>x.State == EntityState.Added ||
+                       x.State == EntityState.Modified ||
+                       x.State == EntityState.Deleted).ToList();
+
+            string computerName = Environment.MachineName;
+
+            string ipAddress = RemoteIpAddress.GetIpAddress();
+
+            DateTime date = DateTime.Now;
+
+            foreach (var item in modifiedEntities)
+            {
+                IBaseEntity entity = item.Entity as IBaseEntity;
+
+                if (item != null)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            entity.CreatedDate = date;
+                            entity.CreatedIP = ipAddress;
+                            entity.CreatedComputerName = computerName;
+                            break;
+                        case EntityState.Modified:
+                            entity.UpdatedDate = date;
+                            entity.UpdatedIP = ipAddress;
+                            entity.UpdatedComputerName = computerName;
+                            break;
+                        case EntityState.Deleted:
+                            entity.DeletedIP = ipAddress;
+                            entity.DeletedDate= date;
+                            entity.DeletedComputerName= computerName;
+                            break;
+                    }
+                }
+            }
+
+            return base.SaveChanges();
         }
     }
 }

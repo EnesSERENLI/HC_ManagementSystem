@@ -1,4 +1,5 @@
 ﻿using HC.Domain.Entities.Interface;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,13 @@ namespace HC.Domain.Repositories.BaseRepository
         Task<List<T>> GetByDefaults(Expression<Func<T, bool>> expression);
 
         Task<bool> Any(Expression<Func<T, bool>> expression);
+        Task<TResult> GetFilteredFirstOrDefault<TResult>(Expression<Func<T, TResult>> selector,
+                                                         Expression<Func<T, bool>> expression,
+                                                         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                                                         Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+        Task<List<TResult>> GetFilteredFirstOrDefaults<TResult>(Expression<Func<T, TResult>> selector,
+                                                         Expression<Func<T, bool>> expression,
+                                                         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                                                         Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     }
 }

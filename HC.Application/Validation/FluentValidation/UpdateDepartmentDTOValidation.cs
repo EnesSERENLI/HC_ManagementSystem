@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace HC.Application.Validation.FluentValidation
 {
-    public class CreateDepartmentDTOValidation : AbstractValidator<CreateDepartmentDTO>
+    public class UpdateDepartmentDTOValidation : AbstractValidator<UpdateDepartmentDTO>
     {
-        public CreateDepartmentDTOValidation()
+        public UpdateDepartmentDTOValidation()
         {
             RuleFor(x => x.DepartmentName).NotEmpty().WithMessage("DepartmentName cannot be empty!").MinimumLength(3).WithMessage("Department name must be at least 3 characters!");
         }

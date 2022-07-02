@@ -2,8 +2,10 @@
 using HC.Domain.Repositories.BaseRepository;
 using HC.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -23,6 +25,7 @@ namespace HC.Infrastructure.Repositories.Abstract
         public async Task<string> Add(T model)
         {
             await table.AddAsync(model);
+            _db.SaveChanges();
             return "Data added";
         }
 
@@ -46,6 +49,48 @@ namespace HC.Infrastructure.Repositories.Abstract
         public async Task<List<T>> GetByDefaults(Expression<Func<T, bool>> expression) => await table.Where(expression).ToListAsync();
 
         public async Task<T> GetById(Guid id) =>await table.FindAsync(id);
+
+        public async Task<TResult> GetFilteredFirstOrDefault<TResult>(Expression<Func<T, TResult>> selector, Expression<Func<T, bool>> expression, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+        {
+            IQueryable<T> query = table;
+            if (include != null)
+            {
+                query = include(query);
+            }
+            if (expression != null)
+            {
+                query = query.Where(expression);
+            }
+            if (orderBy != null)
+            {
+                return await orderBy(query).Select(selector).FirstOrDefaultAsync();
+            }
+            else
+            {
+                return await query.Select(selector).FirstOrDefaultAsync();
+            }
+        }
+
+        public async Task<List<TResult>> GetFilteredFirstOrDefaults<TResult>(Expression<Func<T, TResult>> selector, Expression<Func<T, bool>> expression, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+        {
+            IQueryable<T> query = table;
+            if (include != null)
+            {
+                query = include(query);
+            }
+            if (expression != null)
+            {
+                query = query.Where(expression);
+            }
+            if (orderBy != null)
+            {
+                return await orderBy(query).Select(selector).ToListAsync();
+            }
+            else
+            {
+                return await query.Select(selector).ToListAsync();
+            }
+        }
 
         public Task<List<T>> GetList() => table.Cast<T>().ToListAsync();
 

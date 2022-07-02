@@ -1,5 +1,7 @@
 ﻿using HC.Domain.Entities.Interface;
 using HC.Domain.Repositories.BaseRepository;
+using HC.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,39 +13,56 @@ namespace HC.Infrastructure.Repositories.Abstract
 {
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : class, IBaseEntity
     {
-        public Task<string> Add(T model)
+        private readonly HotCatDbContext _db;
+        protected DbSet<T> table;
+        public BaseRepository(HotCatDbContext db)
         {
-            throw new NotImplementedException();
+            _db = db;
+            table = _db.Set<T>();
+        }
+        public async Task<string> Add(T model)
+        {
+            await table.AddAsync(model);
+            return "Data added";
         }
 
-        public Task<bool> Any(Expression<Func<T, bool>> expression)
+        public async Task<bool> Any(Expression<Func<T, bool>> expression) => await table.AnyAsync(expression);
+
+        public async Task<string> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                T deleted = await GetById(id);
+                deleted.Status = Domain.Enums.Status.Deleted;
+                Update(deleted);
+                return "Data deleted!";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
-        public Task<string> Delete(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<List<T>> GetByDefaults(Expression<Func<T, bool>> expression) => await table.Where(expression).ToListAsync();
 
-        public Task<List<T>> GetByDefaults(Expression<Func<T, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<T> GetById(Guid id) =>await table.FindAsync(id);
 
-        public Task<T> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public Task<List<T>> GetList() => table.Cast<T>().ToListAsync();
 
-        public Task<List<T>> GetList()
+        public async Task<string> Update(T model)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                T updated = await GetById(model.ID);
+                _db.Entry(updated).State = EntityState.Modified;
+                _db.SaveChanges();
 
-        public Task<string> Update(T model)
-        {
-            throw new NotImplementedException();
+                return "Data Updated";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿@model HC.Application.Models.DTO.CreateDepartmentDTO
+
+<div>
+    <form method="post">
+        <div>
+            @if (TempData["message"] != null)
+            {
+                <p>
+                    @TempData["message"]
+                </p>
+            }
+        </div>
+        <label asp-for="DepartmentName">DepartmentName</label>
+        <input type="text" asp-for="DepartmentName"/>
+
+        <button type="submit">
+            Ekle
+        </button>
+    </form>
+    
+</div>

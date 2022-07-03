@@ -2,6 +2,7 @@
 using HC.Domain.UnitOfWork;
 using HC.Infrastructure.Context;
 using HC.Infrastructure.Repositories.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,5 +91,34 @@ namespace HC.Infrastructure.UnitOfWork
                 return _productRepository;
             }
         }
+
+        //public async Task Commit()
+        //{
+        //    await _db.SaveChangesAsync();
+        //}
+
+        //private bool isDispose = false;
+        //public async ValueTask DisposeAsync()
+        //{
+        //    if (!isDispose)
+        //    {
+        //        isDispose = true;
+        //        await DisposeAsync(true);
+        //        GC.SuppressFinalize(this);
+        //    }
+        //}
+
+        //private async Task DisposeAsync(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        await _db.DisposeAsync();
+        //    }
+        //}
+
+        //public async Task executeSqlRaw(string sql, params object[] parameters)
+        //{
+        //    await _db.Database.ExecuteSqlRawAsync(sql, parameters);
+        //}
     }
 }

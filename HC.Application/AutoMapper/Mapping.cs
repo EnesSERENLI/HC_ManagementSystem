@@ -20,6 +20,22 @@ namespace HC.Application.AutoMapper
             CreateMap<UpdateProductDTO, ProductVM>().ReverseMap();
 
             CreateMap<Department, CreateDepartmentDTO>().ReverseMap();
+                //.ForMember(x => x.CreatedIP, option => option.Ignore())
+                //.ForMember(x => x.CreatedDate, option => option.Ignore())
+                //.ForMember(x => x.CreatedComputerName, option => option.Ignore())
+                //.ForMember(x => x.CreatorUserName, option => option.Ignore())
+                //.ForMember(x => x.UpdatedIP, option => option.Ignore())
+                //.ForMember(x => x.UpdatedDate, option => option.Ignore())
+                //.ForMember(x => x.UpdatedComputerName, option => option.Ignore())
+                //.ForMember(x => x.UpdaterUserName, option => option.Ignore())
+                //.ForMember(x => x.DeletedIP, option => option.Ignore())
+                //.ForMember(x => x.DeletedDate, option => option.Ignore())
+                //.ForMember(x => x.DeletedComputerName, option => option.Ignore())
+                //.ForMember(x => x.DeleterUserName, option => option.Ignore())
+                //.ForMember(x => x.Status, option => option.Ignore())
+                //.ForMember(x => x.Employees, option => option.Ignore())
+                //.ForMember(x => x.ID, option => option.Ignore());
+
             CreateMap<Department, DepartmentVM>().ReverseMap();
             CreateMap<Department, UpdateDepartmentDTO>().ReverseMap();
             CreateMap<UpdateDepartmentDTO, DepartmentVM>().ReverseMap();

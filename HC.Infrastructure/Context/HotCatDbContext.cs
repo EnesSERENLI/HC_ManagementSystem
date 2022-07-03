@@ -1,5 +1,4 @@
-﻿using HC.Application.Extensions;
-using HC.Domain.Entities.Concrete;
+﻿using HC.Domain.Entities.Concrete;
 using HC.Domain.Entities.Interface;
 using HC.Infrastructure.Mapping.Concrete;
 using HC.Infrastructure.SeedData;
@@ -55,7 +54,7 @@ namespace HC.Infrastructure.Context
 
             string computerName = Environment.MachineName;
 
-            string ipAddress = RemoteIpAddress.GetIpAddress();
+            //string ipAddress = RemoteIpAddress.GetIpAddress();
 
             DateTime date = DateTime.Now;
 
@@ -69,16 +68,16 @@ namespace HC.Infrastructure.Context
                     {
                         case EntityState.Added:
                             entity.CreatedDate = date;
-                            entity.CreatedIP = ipAddress;
+                            //entity.CreatedIP = ipAddress;
                             entity.CreatedComputerName = computerName;
                             break;
                         case EntityState.Modified:
                             entity.UpdatedDate = date;
-                            entity.UpdatedIP = ipAddress;
+                            //entity.UpdatedIP = ipAddress;
                             entity.UpdatedComputerName = computerName;
                             break;
                         case EntityState.Deleted:
-                            entity.DeletedIP = ipAddress;
+                            //entity.DeletedIP = ipAddress;
                             entity.DeletedDate= date;
                             entity.DeletedComputerName= computerName;
                             break;

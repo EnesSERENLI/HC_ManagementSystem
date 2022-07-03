@@ -1,4 +1,5 @@
-﻿using HC.Presentation.Models;
+﻿using HC.Application.Service.Interface;
+using HC.Presentation.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

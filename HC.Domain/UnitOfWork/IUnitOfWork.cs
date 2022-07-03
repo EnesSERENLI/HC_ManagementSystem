@@ -15,5 +15,10 @@ namespace HC.Domain.UnitOfWork
         IEmployeeRepository EmployeeRepository { get; }
         IDepartmentRepository DepartmentRepository { get; }
         IProductRepository ProductRepository { get; }
+
+        //Task Commit();
+
+
+        //Task executeSqlRaw(string sql, params object[] parameters);
     }
 }

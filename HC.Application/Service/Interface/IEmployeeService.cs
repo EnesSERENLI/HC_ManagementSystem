@@ -3,25 +3,24 @@ using HC.Application.Models.VM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HC.Application.Service.Interface
 {
-    public interface IDepartmentService
+    public interface IEmployeeService
     {
         //Add
-        Task<string> Create(CreateDepartmentDTO model);
+        Task<string> Create(CreateEmployeeDTO model);
         //Delete
         Task<string> Delete(Guid id);
         //Update
-        Task<string> Update(UpdateDepartmentDTO model);
+        Task<string> Update(UpdateEmployeeDTO model);
         //List
-        Task<List<DepartmentVM>> GetDepartments();
+        Task<List<EmployeeVM>> GetEmployees();
 
-        Task<List<DepartmentVM>> GetDefaultDepartments();
+        Task<List<EmployeeVM>> GetDefaultEmployees();
         //Find
-        Task<UpdateDepartmentDTO> GetById(Guid id);
+        Task<UpdateEmployeeDTO> GetById(Guid id);
     }
 }

@@ -31,7 +31,7 @@ namespace HC.Presentation.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _departmentService.GetDepartment());
+            return View(await _departmentService.GetDepartments());
         }
 
         public async Task<IActionResult> Create()

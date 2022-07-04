@@ -22,7 +22,7 @@ namespace HC.Infrastructure.Mapping.Concrete
             builder.Property(x=>x.UnitsInStock).IsRequired(true)
                 .HasConversion<short>();
 
-            builder.Property(x => x.ImagePath).IsRequired(true).HasMaxLength(500);
+            builder.Property(x => x.ImagePath).IsRequired(false).HasMaxLength(500);
 
             builder.HasOne(x => x.SubCategory)
                 .WithMany(x => x.Products)

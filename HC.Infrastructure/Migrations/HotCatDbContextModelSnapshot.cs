@@ -223,6 +223,29 @@ namespace HC.Infrastructure.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("0b7f7c35-cd53-473c-b417-9232c9fbc7ea"),
+                            CategoryName = "Korea",
+                            Description = "Excellent korean food",
+                            Status = 1
+                        },
+                        new
+                        {
+                            ID = new Guid("fa1b08d4-f95a-41a3-8b91-21e50399609a"),
+                            CategoryName = "Japan",
+                            Description = "Excellent Japan food",
+                            Status = 1
+                        },
+                        new
+                        {
+                            ID = new Guid("c8940807-8af8-4c54-83b2-25ba09b38369"),
+                            CategoryName = "China",
+                            Description = "Excellent China food",
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("HC.Domain.Entities.Concrete.Department", b =>
@@ -291,8 +314,26 @@ namespace HC.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            ID = new Guid("a8c93789-aec6-4b80-a6b8-3bf29d543be3"),
+                            ID = new Guid("ead01cee-6a62-4cf2-89d4-461c49718db5"),
+                            DepartmentName = "General management",
+                            Status = 1
+                        },
+                        new
+                        {
+                            ID = new Guid("f432d018-4bfb-4921-9f5d-136b99bb81e0"),
                             DepartmentName = "Purchasing",
+                            Status = 1
+                        },
+                        new
+                        {
+                            ID = new Guid("e9ba196c-a331-4cee-a0a9-dd7a3b3d7bc0"),
+                            DepartmentName = "Waiter",
+                            Status = 1
+                        },
+                        new
+                        {
+                            ID = new Guid("754ce863-37ea-4b60-91df-84dd977048eb"),
+                            DepartmentName = "Sales",
                             Status = 1
                         });
                 });

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -99,6 +98,7 @@ namespace HC.Infrastructure.Repositories.Abstract
             try
             {
                 T updated = await GetById(model.ID);
+                _db.Entry(updated).CurrentValues.SetValues(model);
                 _db.Entry(updated).State = EntityState.Modified;
                 _db.SaveChanges();
 

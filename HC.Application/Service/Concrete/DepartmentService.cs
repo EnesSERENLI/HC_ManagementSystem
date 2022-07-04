@@ -26,6 +26,11 @@ namespace HC.Application.Service.Concrete
         {
             var department = _mapper.Map<Department>(model);
 
+            var result = await _unitOfWork.DepartmentRepository.Any(x=>x.DepartmentName == model.DepartmentName);
+
+            if (result)
+                return "This department already exists!";
+
             await _unitOfWork.DepartmentRepository.Add(department);
 
             return "Department Added!";
@@ -33,11 +38,8 @@ namespace HC.Application.Service.Concrete
 
         public async Task<string> Delete(Guid id)
         {
-            var deleted = await _unitOfWork.DepartmentRepository.GetById(id);
+            await _unitOfWork.DepartmentRepository.GetById(id);
 
-            deleted.Status = Domain.Enums.Status.Deleted;
-
-            await _unitOfWork.DepartmentRepository.Update(deleted);
             return "Department deleted!.";
         }
 
@@ -55,14 +57,28 @@ namespace HC.Application.Service.Concrete
             return model;            
         }
 
-        public async Task<List<DepartmentVM>> GetDepartment()
+        public async Task<List<DepartmentVM>> GetDefaultDepartments()
+        {
+            var departmentList = await _unitOfWork.DepartmentRepository.GetFilteredFirstOrDefaults(selector: x => new DepartmentVM
+            {
+                ID = x.ID,
+                DepartmentName = x.DepartmentName
+            },
+            expression: x => x.Status == Domain.Enums.Status.Active || x.Status == Domain.Enums.Status.Updated,
+            orderBy: x => x.OrderBy(x => x.DepartmentName)
+            );
+
+            return departmentList;
+        }
+
+        public async Task<List<DepartmentVM>> GetDepartments()
         {
             var departmentList =await _unitOfWork.DepartmentRepository.GetFilteredFirstOrDefaults(selector: x => new DepartmentVM
             {
                 ID = x.ID,
                 DepartmentName = x.DepartmentName
             },
-            expression: x => x.Status == Domain.Enums.Status.Active,
+            expression: x => x.Status == Domain.Enums.Status.Active || x.Status == Domain.Enums.Status.Updated || x.Status == Domain.Enums.Status.Deleted,
             orderBy: x => x.OrderBy(x => x.DepartmentName)
             );
 

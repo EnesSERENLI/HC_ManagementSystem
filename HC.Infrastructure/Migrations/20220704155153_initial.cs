@@ -313,7 +313,7 @@ namespace HC.Infrastructure.Migrations
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     UnitsInStock = table.Column<short>(type: "smallint", nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedComputerName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
@@ -421,9 +421,25 @@ namespace HC.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "ID", "CategoryName", "CreatedComputerName", "CreatedDate", "CreatedIP", "CreatorUserName", "DeletedComputerName", "DeletedDate", "DeletedIP", "DeleterUserName", "Description", "Status", "UpdatedComputerName", "UpdatedDate", "UpdatedIP", "UpdaterUserName" },
+                values: new object[,]
+                {
+                    { new Guid("0b7f7c35-cd53-473c-b417-9232c9fbc7ea"), "Korea", null, null, null, null, null, null, null, null, "Excellent korean food", 1, null, null, null, null },
+                    { new Guid("c8940807-8af8-4c54-83b2-25ba09b38369"), "China", null, null, null, null, null, null, null, null, "Excellent China food", 1, null, null, null, null },
+                    { new Guid("fa1b08d4-f95a-41a3-8b91-21e50399609a"), "Japan", null, null, null, null, null, null, null, null, "Excellent Japan food", 1, null, null, null, null }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Departments",
                 columns: new[] { "ID", "CreatedComputerName", "CreatedDate", "CreatedIP", "CreatorUserName", "DeletedComputerName", "DeletedDate", "DeletedIP", "DeleterUserName", "DepartmentName", "Status", "UpdatedComputerName", "UpdatedDate", "UpdatedIP", "UpdaterUserName" },
-                values: new object[] { new Guid("a8c93789-aec6-4b80-a6b8-3bf29d543be3"), null, null, null, null, null, null, null, null, "Purchasing", 1, null, null, null, null });
+                values: new object[,]
+                {
+                    { new Guid("754ce863-37ea-4b60-91df-84dd977048eb"), null, null, null, null, null, null, null, null, "Sales", 1, null, null, null, null },
+                    { new Guid("e9ba196c-a331-4cee-a0a9-dd7a3b3d7bc0"), null, null, null, null, null, null, null, null, "Waiter", 1, null, null, null, null },
+                    { new Guid("ead01cee-6a62-4cf2-89d4-461c49718db5"), null, null, null, null, null, null, null, null, "General management", 1, null, null, null, null },
+                    { new Guid("f432d018-4bfb-4921-9f5d-136b99bb81e0"), null, null, null, null, null, null, null, null, "Purchasing", 1, null, null, null, null }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 
-namespace HC.Application.Extensions
+namespace HC.Infrastructure.Utils
 {
-    public class RemoteIpAddress
+    public class RemoteIpAddress //normalde Application içerisinde Extensions içerisinde verecektim ancak refereans olarak veremediğim için(Servisleri orada tanımladığımdan dolayı) burada kullandım.
     {
         public static string GetIpAddress()
         {

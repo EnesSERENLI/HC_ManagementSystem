@@ -2,6 +2,7 @@
 using HC.Domain.Entities.Interface;
 using HC.Infrastructure.Mapping.Concrete;
 using HC.Infrastructure.SeedData;
+using HC.Infrastructure.Utils;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,7 +19,6 @@ namespace HC.Infrastructure.Context
             :base(options)
         {
         }
-
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
@@ -37,10 +37,14 @@ namespace HC.Infrastructure.Context
             builder.ApplyConfiguration(new EmployeeMap());
             builder.ApplyConfiguration(new OrderDetailMap());
             builder.ApplyConfiguration(new OrderMap());
-            builder.ApplyConfiguration(new DepartmentMap());
-
-            builder.ApplyConfiguration(new DepartmentSeeding());
+            builder.ApplyConfiguration(new DepartmentMap());            
             builder.ApplyConfiguration(new AppUserMap());
+
+            builder.ApplyConfiguration(new CategorySeeding());
+            builder.ApplyConfiguration(new SubCategorySeeding());
+            builder.ApplyConfiguration(new ProductSeeding());
+            builder.ApplyConfiguration(new DepartmentSeeding());
+            builder.ApplyConfiguration(new EmployeeSeeding());
 
             base.OnModelCreating(builder);
         }
@@ -54,7 +58,7 @@ namespace HC.Infrastructure.Context
 
             string computerName = Environment.MachineName;
 
-            //string ipAddress = RemoteIpAddress.GetIpAddress();
+            string ipAddress = RemoteIpAddress.GetIpAddress();
 
             DateTime date = DateTime.Now;
 
@@ -68,18 +72,25 @@ namespace HC.Infrastructure.Context
                     {
                         case EntityState.Added:
                             entity.CreatedDate = date;
-                            //entity.CreatedIP = ipAddress;
+                            entity.CreatedIP = ipAddress;
                             entity.CreatedComputerName = computerName;
+                            entity.Status = Domain.Enums.Status.Active;
                             break;
                         case EntityState.Modified:
-                            entity.UpdatedDate = date;
-                            //entity.UpdatedIP = ipAddress;
-                            entity.UpdatedComputerName = computerName;
-                            break;
-                        case EntityState.Deleted:
-                            //entity.DeletedIP = ipAddress;
-                            entity.DeletedDate= date;
-                            entity.DeletedComputerName= computerName;
+                            if (entity.Status == Domain.Enums.Status.Deleted)
+                            {
+                                entity.DeletedIP = ipAddress;
+                                entity.DeletedDate = date;
+                                entity.DeletedComputerName = computerName;
+                                entity.Status = Domain.Enums.Status.Deleted;
+                            }
+                            else
+                            {
+                                entity.UpdatedDate = date;
+                                entity.UpdatedIP = ipAddress;
+                                entity.UpdatedComputerName = computerName;
+                                entity.Status= Domain.Enums.Status.Updated;
+                            }                            
                             break;
                     }
                 }

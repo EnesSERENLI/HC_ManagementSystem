@@ -17,7 +17,9 @@ namespace HC.Application.Service.Interface
         //Update
         Task<string> Update(UpdateProductDTO model);
         //List
-        Task<List<ProductVM>> GetProduct();
+        Task<List<ProductVM>> GetProducts();
+
+        Task<List<ProductVM>> GetDefaultProducts();
         //Find
         Task<UpdateProductDTO> GetById(Guid id);
     }

@@ -24,6 +24,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<HotCatDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+//AddMVC and FluentValidation
+builder.Services.AddControllersWithViews().AddFluentValidation();
 //AddTransient
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IDepartmentService,DepartmentService>();
@@ -39,6 +41,9 @@ var mapperConfig = new MapperConfiguration(cfg =>
 
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<HotCatDbContext>();
+
 //DependencyResolver
 
 //IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
@@ -50,9 +55,6 @@ builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
 //CreateHostBuilder(args).Build();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<HotCatDbContext>();
-builder.Services.AddControllersWithViews().AddFluentValidation();
 
 var app = builder.Build();
 
@@ -75,6 +77,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",

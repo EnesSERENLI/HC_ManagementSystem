@@ -14,11 +14,12 @@ namespace HC.Infrastructure.SeedData
     {
         public void Configure(EntityTypeBuilder<Department> builder)
         {
-            builder.HasData(new Department
-            {
-                ID = Guid.NewGuid(),
-                DepartmentName = "Purchasing"
-            });
+            builder.HasData(
+                new Department { ID = Guid.NewGuid(), DepartmentName = "General management" },
+                new Department { ID = Guid.NewGuid(), DepartmentName = "Purchasing" },
+                new Department { ID = Guid.NewGuid(), DepartmentName = "Waiter" },
+                new Department { ID = Guid.NewGuid(), DepartmentName = "Sales" }
+                );
         }
     }
 }

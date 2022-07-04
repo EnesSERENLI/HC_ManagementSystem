@@ -3,25 +3,24 @@ using HC.Application.Models.VM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HC.Application.Service.Interface
 {
-    public interface IDepartmentService
+    public interface ISubCategoryService
     {
         //Add
-        Task<string> Create(CreateDepartmentDTO model);
+        Task<string> Create(CreateSubCategoryDTO model);
         //Delete
         Task<string> Delete(Guid id);
         //Update
-        Task<string> Update(UpdateDepartmentDTO model);
+        Task<string> Update(UpdateSubCategoryDTO model);
         //List
-        Task<List<DepartmentVM>> GetDepartments();
+        Task<List<SubCategoryVM>> GetSubCategories();
 
-        Task<List<DepartmentVM>> GetDefaultDepartments();
+        Task<List<SubCategoryVM>> GetDefaultSubCategories();
         //Find
-        Task<UpdateDepartmentDTO> GetById(Guid id);
+        Task<UpdateSubCategoryDTO> GetById(Guid id);
     }
 }

@@ -14,6 +14,7 @@ namespace HC.Application.Models.DTO
         public decimal UnitPrice { get; set; }
         public short UnitsInStock { get; set; }
         public string ImagePath { get; set; }
-        public int SubCategoryId { get; set; }
+        public Guid SubCategoryId { get; set; }
+        public string SubCategoryName { get; set; }
     }
 }

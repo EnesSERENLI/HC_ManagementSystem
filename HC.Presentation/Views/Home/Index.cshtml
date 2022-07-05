@@ -1,8 +1,39 @@
-﻿@{
+﻿@model List<ProductVM>
+@{
     ViewData["Title"] = "Home Page";
 }
+<div class="row">
+    
+    <div class="col-md-12">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <div class="row product-list">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-3">
+                    <section class="panel">
+                        <div class="pro-img-box">
+                            @if (product.ImagePath != null)
+                            {
+                                <img src="~/Content/image/product/@product.ImagePath" alt="Product img" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/img/product1.jpg" alt="Error">
+                            }
+                            <a href="/Cart/AddToCart/@product.ID" class="adtocart">
+                                <i class="icon-shopping-cart"></i>
+                            </a>
+                        </div>
+
+                        <div class="panel-body text-center">
+                            <h4>
+                               @Html.ActionLink(product.ProductName,"Details","Home",new {id=product.ID},new {@class = "pro-title"})
+                            </h4>
+                            <p class="price"> @product.UnitPrice</p>
+                        </div>
+                    </section>
+                </div>
+            }
+        </div>
+    </div>
 </div>

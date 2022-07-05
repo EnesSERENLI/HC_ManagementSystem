@@ -17,11 +17,23 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HC.Application\HC.Application.csproj" />
     <ProjectReference Include="..\HC.Infrastructure\HC.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="wwwroot\Content\assets\jquery-file-upload\server\node\public\files\thumbnail\" />
+    <Folder Include="wwwroot\Content\assets\jquery-file-upload\server\node\tmp\" />
+    <Folder Include="wwwroot\Content\assets\jquery-file-upload\server\php\files\thumbnail\" />
+    <Folder Include="wwwroot\Content\images\users\" />
+    <Folder Include="wwwroot\Content\images\products\" />
   </ItemGroup>
 
 </Project>

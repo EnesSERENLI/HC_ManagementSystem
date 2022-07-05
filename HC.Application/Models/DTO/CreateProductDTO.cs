@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,8 @@ namespace HC.Application.Models.DTO
         public decimal UnitPrice { get; set; }
         public short UnitsInStock { get; set; }
         public string ImagePath { get; set; }
-        public int SubCategoryId { get; set; }
+        public IFormFile Image { get; set; }
+        public Guid SubCategoryId { get; set; }
 
     }
 }

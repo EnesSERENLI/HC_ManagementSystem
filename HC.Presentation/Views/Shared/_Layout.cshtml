@@ -1,50 +1,175 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HC.Presentation</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/HC.Presentation.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HC.Presentation</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="Hotcat, Restaurant, Food">
+    <link rel="shortcut icon" href="/img/favicon.png">
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - HC.Presentation - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <title>HotCat Restaurant</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="~/Content/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.css" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <link href="~/Content/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="~/Content/js/html5shiv.js"></script>
+      <script src="~/Content/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <section id="container">
+        <!--header start-->
+        <header class="header white-bg">
+            <div class="sidebar-toggle-box">
+            <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+            </div>
+            <!--logo start-->
+            <a href="/Home/index" class="logo">HotCat<span> Restaurant</span></a>
+            <!--logo end-->
+            <div class="top-nav ">
+            <!--search & user info start-->
+            <ul class="nav pull-right top-menu">
+            <!-- user login dropdown start-->
+            <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <img alt="" src="~/Content/img/avatar1_small.jpg">
+            <span class="username">Jhon Doue</span>
+            </a>
+            <ul class="dropdown-menu extended logout">
+            <div class="log-arrow-up"></div>
+            <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
+            <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
+            <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
+            <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+            </ul>
+            </li>
+            <!-- user login dropdown end -->
+            </ul>
+            <!--search & user info end-->
+            </div>
+            </header>
+        <!--header end-->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+                    <li>
+                        <a class="active" href="/Home/index">
+                            <i class="icon-dashboard"></i>
+                            <span>Anasayfa</span>
+                        </a>    
+                    </li>
+                     <!--multi level menu start-->
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="icon-sitemap"></i>
+                            <span>Kategoriler</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="javascript:;">Bütün Menüler</a></li>
+                            <li class="sub-menu">
+                                <a href="boxed_page.html">Kore Yemekleri</a>
+                                <ul class="sub">
+                                    <li><a href="javascript:;">Korean Ramen</a></li>                                    
+                                </ul>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="boxed_page.html">Çin Yemekleri</a>
+                                <ul class="sub">
+                                    <li><a href="javascript:;">China Ramen</a></li>                                    
+                                </ul>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="boxed_page.html">Japon Yemekleri</a>
+                                <ul class="sub">
+                                    <li><a href="javascript:;">Japan Ramen</a></li>                                    
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--multi level menu end-->
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="icon-glass"></i>
+                            <span>Extra</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="blank.html">Blank Page</a></li>
+                            <li><a href="lock_screen.html">Lock Screen</a></li>
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="invoice.html">Invoice</a></li>
+                            <li><a href="search_result.html">Search Result</a></li>
+                            <li><a href="404.html">404 Error</a></li>
+                            <li><a href="500.html">500 Error</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <i class="icon-user"></i>
+                            <span>Login Page</span>
+                        </a>
+                    </li>                  
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                @RenderBody()
+            </section>
+        </section>
+        <!--main content end-->
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                2013 &copy; FlatLab by VectorLab.
+                <a href="#" class="go-top">
+                    <i class="icon-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="~/Content/js/jquery.js"></script>
+    <script src="~/Content/js/jquery-1.8.3.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="~/Content/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="~/Content/js/jquery.scrollTo.min.js"></script>
+    <script src="~/Content/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="~/Content/js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="~/Content/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="~/Content/js/owl.carousel.js"></script>
+    <script src="~/Content/js/jquery.customSelect.min.js"></script>
+    <script src="~/Content/js/respond.min.js"></script>
+
+    <script class="include" type="text/javascript" src="~/Content/js/jquery.dcjqaccordion.2.7.js"></script>
+
+    <!--common script for all pages-->
+    <script src="~/Content/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script src="~/Content/js/sparkline-chart.js"></script>
+    <script src="~/Content/js/easy-pie-chart.js"></script>
+    <script src="~/Content/js/count.js"></script>
+    @*@RenderSection("scripts",false)*@
 </body>
 </html>

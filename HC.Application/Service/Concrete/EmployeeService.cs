@@ -47,7 +47,8 @@ namespace HC.Application.Service.Concrete
                 LastName = x.LastName,
                 Title = x.Title,
                 Address = x.Address,
-                Department = x.Department.DepartmentName
+                Department = x.Department.DepartmentName,
+                DepartmentId = x.DepertmentId               
             },
             expression: x=> x.ID == id);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HC.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace HC.Application.Models.VM
         public short UnitsInStock { get; set; }
         public string ImagePath { get; set; }
         public string SubCategoryName { get; set; }
+        public Guid SubCategoryId { get; set; }
+        public Status Status { get; set; }
 
     }
 }

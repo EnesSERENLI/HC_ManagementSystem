@@ -11,5 +11,8 @@ namespace HC.Application.Models.DTO
         public Guid ID { get; set; }
         public string SubCategoryName { get; set; }
         public string Description { get; set; }
+
+        public Guid CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 }

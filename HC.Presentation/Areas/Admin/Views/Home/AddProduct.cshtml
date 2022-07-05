@@ -1,0 +1,69 @@
+﻿@model CreateProductDTO
+@{
+    ViewData["Title"] = "AddProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-6">
+    <section class="panel">
+        <header class="panel-heading">
+            Add Product
+        </header>
+        <div class="panel-body">
+            <div class="alert-error text-success">
+                @if (TempData["message"] != null)
+                {
+                    <div class="alert alert-danger alert-block fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <h4>
+                            <i class="icon-ok-sign"></i>
+                            Error!
+                        </h4>
+                        <p>@TempData["message"]</p>
+                    </div>
+                }
+            </div>
+            <form method="post" role="form" enctype="multipart/form-data" asp-action="AddProduct" asp-controller="Home">
+                <div class="form-group">
+                    <label asp-for="ProductName"></label>
+                    <input type="text" class="form-control round-input" asp-for="ProductName" />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <input type="text" class="form-control round-input" asp-for="Description" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>SubCategoryName</label>
+                    <select class="form-control input-lg m-bot15" name="SubCategoryId">
+                        @foreach (var subCategory in ViewBag.SubCategories)
+                        {
+                            <option value="@subCategory.ID">@subCategory.SubCategoryName</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UnitPrice"></label>
+                    <input type="number" class="form-control round-input" asp-for="UnitPrice">
+                    <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UnitsInStock"></label>
+                    <input type="number" class="form-control round-input" asp-for="UnitsInStock">
+                    <span asp-validation-for="UnitsInStock" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Image"> choose  a ımage</label>
+                    <input type="file" asp-for="Image" class="form-control" />
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+
+        </div>
+    </section>
+</div>
+

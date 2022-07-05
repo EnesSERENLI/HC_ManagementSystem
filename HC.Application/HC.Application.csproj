@@ -10,15 +10,14 @@
     <PackageReference Include="Autofac" Version="6.4.0" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="FluentValidation" Version="11.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.1" />
+	  <PackageReference Include="SixLabors.ImageSharp.Web" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HC.Domain\HC.Domain.csproj" />
     <ProjectReference Include="..\HC.Infrastructure\HC.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>

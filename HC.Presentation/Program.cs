@@ -7,11 +7,8 @@ using HC.Application.InversionOfControl;
 using HC.Application.Service.Concrete;
 using HC.Application.Service.Interface;
 using HC.Domain.Entities.Concrete;
-using HC.Domain.Repositories.BaseRepository;
-using HC.Domain.Repositories.EntityTypeRepositoy;
 using HC.Domain.UnitOfWork;
 using HC.Infrastructure.Context;
-using HC.Infrastructure.Repositories.Concrete;
 using HC.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +25,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews().AddFluentValidation();
 //AddTransient
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<IDepartmentService,DepartmentService>();
+builder.Services.AddTransient<IDepartmentService, DepartmentService>();
+builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<ISubCategoryService, SubCategoryService>();
 
 //AutoMapper
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -79,9 +78,17 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(x => {
+    x.MapControllerRoute(
+        name: "Areas",
+        pattern: "{area=exist}/{Controller=home}/{Action=index}/{id?}" //Area Route
+    );
+    x.MapControllerRoute(
+        name: "default",
+        pattern: "{Controller=Home}/{Action=Index}/{id?}" //Default Route
+    );
+});
+
 app.MapRazorPages();
 
 app.Run();

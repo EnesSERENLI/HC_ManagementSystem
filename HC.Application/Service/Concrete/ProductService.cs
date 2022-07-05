@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using HC.Application.Extensions;
 using HC.Application.Models.DTO;
 using HC.Application.Models.VM;
 using HC.Application.Service.Interface;
 using HC.Domain.Entities.Concrete;
 using HC.Domain.UnitOfWork;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +27,6 @@ namespace HC.Application.Service.Concrete
         }
         public async Task<string> Create(CreateProductDTO model)
         {
-            //todo: ürün eklenirken resim işlemleri dahil edilecek!
             var product = _mapper.Map<Product>(model);
             
             var result = await _unitOfWork.ProductRepository.Any(x=>x.ProductName == product.ProductName);
@@ -33,9 +35,22 @@ namespace HC.Application.Service.Concrete
                 return "This Product already exists";
             }
 
-            await _unitOfWork.ProductRepository.Add(product);
+            ImageUploader imageUploader = new ImageUploader();
+            var imageResult = imageUploader.IsValid(model.Image);
+            if (imageResult)
+            {
+                using var image = Image.Load(model.Image.OpenReadStream());
+                //image.Mutate(x => x.Resize(256, 256));
+                image.Save("wwwroot/Content/images/products/" + product.ProductName + ".jpg");
+                product.ImagePath = ("/Content/images/products/" + product.ProductName + ".jpg");
 
-            return "Product added!";
+                await _unitOfWork.ProductRepository.Add(product);
+
+                return "Product added!";
+            }
+
+
+            return "Please choise a image!";
         }
 
         public async Task<string> Delete(Guid id)
@@ -55,7 +70,8 @@ namespace HC.Application.Service.Concrete
                 ImagePath = x.ImagePath,
                 UnitPrice = x.UnitPrice,
                 UnitsInStock = x.UnitsInStock,
-                SubCategoryName = x.SubCategory.SubCategoryName
+                SubCategoryName = x.SubCategory.SubCategoryName,
+                SubCategoryId = x.SubCategoryId
             },
             expression: x=> x.ID == id);
 
@@ -91,7 +107,8 @@ namespace HC.Application.Service.Concrete
                 UnitPrice = x.UnitPrice,
                 UnitsInStock = x.UnitsInStock,
                 ImagePath = x.ImagePath,
-                SubCategoryName = x.SubCategory.SubCategoryName
+                SubCategoryName = x.SubCategory.SubCategoryName,
+                Status = x.Status
             },
             expression: x => x.Status == Domain.Enums.Status.Active || x.Status == Domain.Enums.Status.Updated || x.Status == Domain.Enums.Status.Deleted);
 

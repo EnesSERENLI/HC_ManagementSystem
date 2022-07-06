@@ -35,7 +35,7 @@ namespace HC.Domain.Entities.Concrete
         public string DeleterUserName { get; set; }
 
         //Relations
-        public Guid DepertmentId { get; set; }
+        public Guid DepartmentId { get; set; }
         public virtual Department Department { get; set; }
         public virtual List<Order> Orders { get; set; }
     }

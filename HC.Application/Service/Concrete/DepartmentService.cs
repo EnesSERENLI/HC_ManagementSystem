@@ -38,17 +38,26 @@ namespace HC.Application.Service.Concrete
 
         public async Task<string> Delete(Guid id)
         {
-            await _unitOfWork.DepartmentRepository.GetById(id);
+            await _unitOfWork.DepartmentRepository.Delete(id);
 
             return "Department deleted!.";
         }
 
         public async Task<UpdateDepartmentDTO> GetById(Guid id)
         {
-            var department = await _unitOfWork.DepartmentRepository.GetFilteredFirstOrDefault(selector: x => new DepartmentVM
+            var department = await _unitOfWork.DepartmentRepository.GetFilteredFirstOrDefault(selector: x => new Department
             {
                 ID = x.ID,
                 DepartmentName = x.DepartmentName,
+                CreatedIP = x.CreatedIP,
+                CreatedDate = x.CreatedDate,
+                CreatedComputerName = x.CreatedComputerName,
+                UpdatedComputerName = x.UpdatedComputerName,
+                UpdatedIP = x.UpdatedIP,
+                UpdatedDate = x.UpdatedDate,
+                DeletedIP = x.DeletedIP,
+                DeletedDate = x.DeletedDate,
+                DeletedComputerName = x.DeletedComputerName
             },
             expression: x => x.ID == id);
 
@@ -76,7 +85,8 @@ namespace HC.Application.Service.Concrete
             var departmentList =await _unitOfWork.DepartmentRepository.GetFilteredFirstOrDefaults(selector: x => new DepartmentVM
             {
                 ID = x.ID,
-                DepartmentName = x.DepartmentName
+                DepartmentName = x.DepartmentName,
+                Status = x.Status
             },
             expression: x => x.Status == Domain.Enums.Status.Active || x.Status == Domain.Enums.Status.Updated || x.Status == Domain.Enums.Status.Deleted,
             orderBy: x => x.OrderBy(x => x.DepartmentName)

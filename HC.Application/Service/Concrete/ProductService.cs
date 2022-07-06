@@ -40,9 +40,9 @@ namespace HC.Application.Service.Concrete
             if (imageResult)
             {
                 using var image = Image.Load(model.Image.OpenReadStream());
-                //image.Mutate(x => x.Resize(256, 256));
-                image.Save("wwwroot/Content/images/products/" + product.ProductName + ".jpg");
-                product.ImagePath = ("/Content/images/products/" + product.ProductName + ".jpg");
+                image.Mutate(x => x.Resize(200, 200));
+                image.Save("wwwroot/Content/images/products/" + product.ProductName + imageUploader.GetExtension());
+                product.ImagePath = ("/Content/images/products/" + product.ProductName + imageUploader.GetExtension());
 
                 await _unitOfWork.ProductRepository.Add(product);
 
@@ -62,7 +62,7 @@ namespace HC.Application.Service.Concrete
 
         public async Task<UpdateProductDTO> GetById(Guid id)
         {
-            var product = await _unitOfWork.ProductRepository.GetFilteredFirstOrDefault(selector: x => new ProductVM
+            var product = await _unitOfWork.ProductRepository.GetFilteredFirstOrDefault(selector: x => new Product
             {
                 ID = x.ID,
                 ProductName = x.ProductName,
@@ -70,8 +70,16 @@ namespace HC.Application.Service.Concrete
                 ImagePath = x.ImagePath,
                 UnitPrice = x.UnitPrice,
                 UnitsInStock = x.UnitsInStock,
-                SubCategoryName = x.SubCategory.SubCategoryName,
-                SubCategoryId = x.SubCategoryId
+                SubCategoryId = x.SubCategoryId,
+                CreatedIP = x.CreatedIP,
+                CreatedDate = x.CreatedDate,
+                CreatedComputerName = x.CreatedComputerName,
+                UpdatedComputerName = x.UpdatedComputerName,
+                UpdatedIP = x.UpdatedIP,
+                UpdatedDate = x.UpdatedDate,
+                DeletedIP = x.DeletedIP,
+                DeletedDate = x.DeletedDate,
+                DeletedComputerName = x.DeletedComputerName
             },
             expression: x=> x.ID == id);
 
@@ -90,6 +98,7 @@ namespace HC.Application.Service.Concrete
                 UnitPrice = x.UnitPrice,
                 UnitsInStock = x.UnitsInStock,
                 ImagePath = x.ImagePath,
+                Status = x.Status,
                 SubCategoryName = x.SubCategory.SubCategoryName
             },
             expression: x=>x.Status != Domain.Enums.Status.Deleted);
@@ -118,6 +127,16 @@ namespace HC.Application.Service.Concrete
         public async Task<string> Update(UpdateProductDTO model)
         {
             var product = _mapper.Map<Product>(model);
+
+            ImageUploader imageUploader = new ImageUploader();
+            var imageResult = imageUploader.IsValid(model.Image);
+            if (imageResult)
+            {
+                using var image = Image.Load(model.Image.OpenReadStream());
+                image.Mutate(x => x.Resize(150, 150));
+                image.Save("wwwroot/Content/images/products/" + product.ProductName + imageUploader.GetExtension());
+                product.ImagePath = ("/Content/images/products/" + product.ProductName + imageUploader.GetExtension());
+            }
 
             await _unitOfWork.ProductRepository.Update(product);
 

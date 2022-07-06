@@ -40,15 +40,23 @@ namespace HC.Application.Service.Concrete
 
         public async Task<UpdateEmployeeDTO> GetById(Guid id)
         {
-            var employee = await _unitOfWork.EmployeeRepository.GetFilteredFirstOrDefault(selector: x => new EmployeeVM
+            var employee = await _unitOfWork.EmployeeRepository.GetFilteredFirstOrDefault(selector: x => new Employee
             {
                 ID = x.ID,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 Title = x.Title,
                 Address = x.Address,
-                Department = x.Department.DepartmentName,
-                DepartmentId = x.DepertmentId               
+                DepartmentId = x.DepartmentId,
+                CreatedIP = x.CreatedIP,
+                CreatedDate = x.CreatedDate,
+                CreatedComputerName = x.CreatedComputerName,
+                UpdatedComputerName = x.UpdatedComputerName,
+                UpdatedIP = x.UpdatedIP,
+                UpdatedDate = x.UpdatedDate,
+                DeletedIP = x.DeletedIP,
+                DeletedDate = x.DeletedDate,
+                DeletedComputerName = x.DeletedComputerName
             },
             expression: x=> x.ID == id);
 
@@ -82,6 +90,8 @@ namespace HC.Application.Service.Concrete
                 LastName = x.LastName,
                 Title = x.Title,
                 Address = x.Address,
+                DepartmentId = x.DepartmentId,
+                Status = x.Status,
                 Department = x.Department.DepartmentName
             },
             expression: x => x.Status == Domain.Enums.Status.Active || x.Status == Domain.Enums.Status.Updated || x.Status == Domain.Enums.Status.Deleted);

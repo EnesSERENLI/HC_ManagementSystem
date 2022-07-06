@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HC.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,7 @@ namespace HC.Application.Models.VM
         public string Address { get; set; }
         public string Department { get; set; }
         public Guid DepartmentId { get; set; }
+
+        public Status Status { get; set; }
     }
 }

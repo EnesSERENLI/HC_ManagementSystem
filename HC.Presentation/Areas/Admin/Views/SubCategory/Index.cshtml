@@ -1,0 +1,69 @@
+﻿@model List<SubCategoryVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                SubCategories
+            </header>
+            <div class="alert-error text-success">
+                @if (TempData["message"] != null)
+                {
+                    <div class="alert alert-success alert-block fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <h4>
+                            <i class="icon-ok-sign"></i>
+                            Success!
+                        </h4>
+                        <p>@TempData["message"]</p>
+                    </div>
+                }
+            </div>
+            <table class="table table-striped table-advance table-hover">
+                <thead>
+                    <tr>
+                        <th><i class="icon-bullhorn"></i> SubCategoryName</th>
+                        <th class="hidden-phone"><i class="icon-star-empty"></i> Description</th>
+                        <th><i class=" icon-edit"></i> Status</th>
+                        <th><a asp-action="AddSubCategory" class="btn btn-primary btn-sm">Add SubCategory</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var subCategory in Model)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(subCategory.SubCategoryName, "Details", new { id = subCategory.ID })</td>
+                            <td class="hidden-phone">@subCategory.Description</td>
+                            <td>
+                                @if (subCategory.Status == HC.Domain.Enums.Status.Active)
+                                {
+                                    <span class="label label-success label-mini">@subCategory.Status</span>
+                                }
+                                else if (subCategory.Status == HC.Domain.Enums.Status.Deleted)
+                                {
+                                    <span class="label label-danger label-mini">@subCategory.Status</span>
+                                }
+                                else if (subCategory.Status == HC.Domain.Enums.Status.Updated)
+                                {
+                                    <span class="label label-warning">@subCategory.Status</span>
+                                }
+
+                            </td>
+                            <td>
+                                <a asp-area="admin" asp-action="UpdateSubCategory" asp-route-id="@subCategory.ID" class="btn btn-warning btn-xs icon-pencil">Update</a>
+                                <a asp-area="admin" asp-action="DeleteSubCategory" asp-route-id="@subCategory.ID" class="btn btn-danger btn-xs icon-trash">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+

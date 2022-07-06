@@ -34,7 +34,7 @@ namespace HC.Application.Service.Concrete
             }
             await _unitOfWork.SubCategoryRepository.Add(subCategory);
 
-            return "Subcategory added!";
+            return "SubCategory added!";
         }
 
         public async Task<string> Delete(Guid id)
@@ -46,11 +46,20 @@ namespace HC.Application.Service.Concrete
 
         public async Task<UpdateSubCategoryDTO> GetById(Guid id)
         {
-            var subCategory = await _unitOfWork.SubCategoryRepository.GetFilteredFirstOrDefault(selector: x => new SubCategoryVM
+            var subCategory = await _unitOfWork.SubCategoryRepository.GetFilteredFirstOrDefault(selector: x => new SubCategory
             {
                 ID = x.ID,
                 SubCategoryName = x.SubCategoryName,
-                Description = x.Description
+                Description = x.Description,
+                CreatedIP = x.CreatedIP,
+                CreatedDate = x.CreatedDate,
+                CreatedComputerName = x.CreatedComputerName,
+                UpdatedComputerName = x.UpdatedComputerName,
+                UpdatedIP = x.UpdatedIP,
+                UpdatedDate = x.UpdatedDate,
+                DeletedIP = x.DeletedIP,
+                DeletedDate = x.DeletedDate,
+                DeletedComputerName = x.DeletedComputerName
             },
             expression: x=> x.ID == id);
 
@@ -65,6 +74,7 @@ namespace HC.Application.Service.Concrete
             {
                 ID = x.ID,
                 SubCategoryName = x.SubCategoryName,
+                Status = x.Status,
                 Description = x.Description
             },
             expression: x => x.Status == Domain.Enums.Status.Active || x.Status == Domain.Enums.Status.Updated || x.Status == Domain.Enums.Status.Deleted
@@ -78,7 +88,8 @@ namespace HC.Application.Service.Concrete
             {
                 ID = x.ID,
                 SubCategoryName = x.SubCategoryName,
-                Description = x.Description
+                Description = x.Description,
+                Status = x.Status               
             },
             expression: x => x.Status == Domain.Enums.Status.Active || x.Status == Domain.Enums.Status.Updated
             );

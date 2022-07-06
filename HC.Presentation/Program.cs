@@ -28,6 +28,8 @@ builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IDepartmentService, DepartmentService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<ISubCategoryService, SubCategoryService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
+builder.Services.AddTransient<IEmployeeService, EmployeeService>();
 
 //AutoMapper
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -77,12 +79,13 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-
 app.UseEndpoints(x => {
+
     x.MapControllerRoute(
-        name: "Areas",
-        pattern: "{area=exist}/{Controller=home}/{Action=index}/{id?}" //Area Route
+        name: "areas",
+        pattern: "{area:exists}/{Controller=home}/{Action=index}/{id?}" //Area Route
     );
+
     x.MapControllerRoute(
         name: "default",
         pattern: "{Controller=Home}/{Action=Index}/{id?}" //Default Route

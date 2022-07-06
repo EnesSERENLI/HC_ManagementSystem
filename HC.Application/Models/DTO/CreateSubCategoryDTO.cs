@@ -10,6 +10,6 @@ namespace HC.Application.Models.DTO
     {
         public string SubCategoryName { get; set; }
         public string Description { get; set; }
-
+        public Guid CategoryId { get; set; }
     }
 }

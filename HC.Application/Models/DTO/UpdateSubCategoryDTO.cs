@@ -14,5 +14,18 @@ namespace HC.Application.Models.DTO
 
         public Guid CategoryId { get; set; }
         public string CategoryName { get; set; }
+
+        public DateTime? CreatedDate { get; set; }
+        public string CreatedComputerName { get; set; }
+        public string CreatedIP { get; set; }
+        public string CreatorUserName { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public string UpdatedComputerName { get; set; }
+        public string UpdatedIP { get; set; }
+        public string UpdaterUserName { get; set; }
+        public DateTime? DeletedDate { get; set; }
+        public string DeletedComputerName { get; set; }
+        public string DeletedIP { get; set; }
+        public string DeleterUserName { get; set; }
     }
 }

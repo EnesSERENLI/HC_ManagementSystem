@@ -3,7 +3,11 @@
     ViewData["Title"] = "Home Page";
 }
 <div class="row">
-    
+    <div class="col-md-12 text-center mb-3">
+        <h1 class="home_header">
+            Asian Kitchen's Menu
+        </h1>
+    </div>
     <div class="col-md-12">
 
         <div class="row product-list">
@@ -14,7 +18,7 @@
                         <div class="pro-img-box">
                             @if (product.ImagePath != null)
                             {
-                                <img src="~/Content/image/product/@product.ImagePath" alt="Product img" />
+                                <img class="imageSize" src="@product.ImagePath" alt="Product img" />
                             }
                             else
                             {
@@ -27,9 +31,9 @@
 
                         <div class="panel-body text-center">
                             <h4>
-                               @Html.ActionLink(product.ProductName,"Details","Home",new {id=product.ID},new {@class = "pro-title"})
+                               <a asp-controller="Home" asp-action="Details" asp-route-id="@product.ID" class="pro-title">@product.ProductName</a>
                             </h4>
-                            <p class="price"> @product.UnitPrice</p>
+                            <p class="price"> @product.UnitPrice.ToString("C2")</p>
                         </div>
                     </section>
                 </div>

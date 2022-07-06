@@ -1,1 +1,10 @@
-﻿
+﻿.home_header {
+
+    font-family: "Great Vibes", cursive;
+    font-size: 3rem;
+    text-align: center;
+    color: #ff6a23;
+}
+.imageSize{
+    height:350px;
+}

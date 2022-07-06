@@ -24,33 +24,56 @@ namespace HC.Application.Service.Concrete
         }
         public async Task<string> Create(CreateCategoryDTO model)
         {
-            var category = _mapper.Map<Category>(model);
-
-            var result = await _unitOfWork.CategoryRepository.Any(x => x.CategoryName == model.CategoryName);
-
-            if (result)
+            try
             {
-                return "This category already exists!";
-            }
-            await _unitOfWork.CategoryRepository.Add(category);
+                var category = _mapper.Map<Category>(model);
 
-            return "Category added!";
+                var result = await _unitOfWork.CategoryRepository.Any(x => x.CategoryName == model.CategoryName);
+
+                if (result)
+                {
+                    return "This category already exists!";
+                }
+                await _unitOfWork.CategoryRepository.Add(category);
+
+                return "Category added!";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public async Task<string> Delete(Guid id)
         {
-            await _unitOfWork.CategoryRepository.GetById(id);
+            try
+            {
+                await _unitOfWork.CategoryRepository.Delete(id);
 
-            return "Category deleted!";
+                return "Category deleted!";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public async Task<UpdateCategoryDTO> GetById(Guid id)
         {
-            var category = await _unitOfWork.CategoryRepository.GetFilteredFirstOrDefault(selector: x => new CategoryVM
+            var category = await _unitOfWork.CategoryRepository.GetFilteredFirstOrDefault(selector: x => new Category
             {
                 ID = x.ID,
                 CategoryName = x.CategoryName,
-                Description = x.Description
+                Description = x.Description,
+                CreatedIP = x.CreatedIP,
+                CreatedDate = x.CreatedDate,
+                CreatedComputerName = x.CreatedComputerName,
+                UpdatedComputerName = x.UpdatedComputerName,
+                UpdatedIP = x.UpdatedIP,
+                UpdatedDate = x.UpdatedDate,
+                DeletedIP = x.DeletedIP,
+                DeletedDate = x.DeletedDate,
+                DeletedComputerName = x.DeletedComputerName
             },
             expression: x => x.ID == id);
 
@@ -65,7 +88,8 @@ namespace HC.Application.Service.Concrete
             {
                 ID = x.ID,
                 CategoryName = x.CategoryName,
-                Description = x.Description
+                Description = x.Description,
+                Status = x.Status
             },
             expression: x => x.Status == Domain.Enums.Status.Active || x.Status == Domain.Enums.Status.Updated || x.Status == Domain.Enums.Status.Deleted
             );
@@ -79,6 +103,7 @@ namespace HC.Application.Service.Concrete
             {
                 ID = x.ID,
                 CategoryName = x.CategoryName,
+                Status = x.Status,
                 Description = x.Description
             },
             expression: x => x.Status == Domain.Enums.Status.Active || x.Status == Domain.Enums.Status.Updated
@@ -87,9 +112,20 @@ namespace HC.Application.Service.Concrete
             return categoryList;
         }
 
-        public Task<string> Update(UpdateCategoryDTO model)
+        public async Task<string> Update(UpdateCategoryDTO model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var updated = _mapper.Map<Category>(model);
+
+                await _unitOfWork.CategoryRepository.Update(updated);
+
+                return "Category updated!";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }

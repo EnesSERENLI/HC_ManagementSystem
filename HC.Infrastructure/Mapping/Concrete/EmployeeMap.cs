@@ -22,7 +22,7 @@ namespace HC.Infrastructure.Mapping.Concrete
 
             builder.HasOne(x => x.Department)
                 .WithMany(x => x.Employees)
-                .HasForeignKey(x => x.DepertmentId);
+                .HasForeignKey(x => x.DepartmentId);
 
             base.Configure(builder);
         }

@@ -34,7 +34,7 @@
                         <th class="hidden-phone"><i class="icon-star-empty"></i> UnitPrice</th>
                         <th class="hidden-phone"><i class="icon-star-empty"></i> UnitInStock</th>
                         <th><i class=" icon-edit"></i> Status</th>
-                        <th>@Html.ActionLink("Add Product", "AddProduct", "Home",null, new { @class = "btn btn-primary btn-sm" })</th>
+                        <th><a asp-action="AddProduct" class="btn btn-primary btn-sm">Add Product</a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,9 +70,8 @@
 
                             </td>
                             <td>
-                                @Html.ActionLink("Düzenle", "UpdateProduct", "Product", new { product.ID }, new { @class = "btn btn-primary btn-xs icon-pencil" })
-                                @Html.ActionLink("Sil", "DeleteProduct", "Product", new { product.ID }, new { @class = "btn btn-warning btn-xs icon-trash" })
-                                @Html.ActionLink("Kalıcı Sil", "DeleteForceProduct", "Product", new { product.ID }, new { @class = "btn btn-danger btn-xs icon-trash" })
+                                <a asp-area="admin" asp-action="UpdateProduct" asp-route-id="@product.ID" class="btn btn-warning btn-xs icon-pencil">Update</a>
+                                <a asp-area="admin" asp-action="DeleteProduct" asp-route-id="@product.ID" class="btn btn-danger btn-xs icon-trash">Delete</a>
                             </td>
                         </tr>
                     }

@@ -1,0 +1,40 @@
+﻿@model CreateDepartmentDTO
+@{
+    ViewData["Title"] = "AddDepartment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-6">
+    <section class="panel">
+        <header class="panel-heading">
+            Add Department
+        </header>
+        <div class="panel-body">
+            <div class="alert-error text-success">
+                @if (TempData["message"] != null)
+                {
+                    <div class="alert alert-danger alert-block fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <h4>
+                            <i class="icon-ok-sign"></i>
+                            Error!
+                        </h4>
+                        <p>@TempData["message"]</p>
+                    </div>
+                }
+            </div>
+            <form method="post" role="form" asp-action="AddDepartment">
+                <div class="form-group">
+                    <label asp-for="DepartmentName"></label>
+                    <input type="text" class="form-control round-input" asp-for="DepartmentName" />
+                    <span asp-validation-for="DepartmentName" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+
+        </div>
+    </section>
+</div>
+

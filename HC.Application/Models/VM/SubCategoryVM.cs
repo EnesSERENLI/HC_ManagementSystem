@@ -9,7 +9,7 @@ namespace HC.Application.Models.VM
 {
     public class SubCategoryVM
     {
-        public Guid ID { get; set; }
+        public Guid? ID { get; set; }
         public string SubCategoryName { get; set; }
         public string Description { get; set; }
 

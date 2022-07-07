@@ -62,24 +62,25 @@ namespace HC.Application.Service.Concrete
 
         public async Task<UpdateProductDTO> GetById(Guid id)
         {
-            var product = await _unitOfWork.ProductRepository.GetFilteredFirstOrDefault(selector: x => new Product
+            var product = await _unitOfWork.ProductRepository.GetFilteredFirstOrDefault(selector: x => new ProductVM
             {
                 ID = x.ID,
                 ProductName = x.ProductName,
                 Description = x.Description,
                 ImagePath = x.ImagePath,
                 UnitPrice = x.UnitPrice,
-                UnitsInStock = x.UnitsInStock,
+                UnitsInStock = x.UnitsInStock,                
                 SubCategoryId = x.SubCategoryId,
-                CreatedIP = x.CreatedIP,
-                CreatedDate = x.CreatedDate,
-                CreatedComputerName = x.CreatedComputerName,
-                UpdatedComputerName = x.UpdatedComputerName,
-                UpdatedIP = x.UpdatedIP,
-                UpdatedDate = x.UpdatedDate,
-                DeletedIP = x.DeletedIP,
-                DeletedDate = x.DeletedDate,
-                DeletedComputerName = x.DeletedComputerName
+                SubCategoryName = x.SubCategory.SubCategoryName
+                //CreatedIP = x.CreatedIP,
+                //CreatedDate = x.CreatedDate,
+                //CreatedComputerName = x.CreatedComputerName,
+                //UpdatedComputerName = x.UpdatedComputerName,
+                //UpdatedIP = x.UpdatedIP,
+                //UpdatedDate = x.UpdatedDate,
+                //DeletedIP = x.DeletedIP,
+                //DeletedDate = x.DeletedDate,
+                //DeletedComputerName = x.DeletedComputerName
             },
             expression: x=> x.ID == id);
 
@@ -120,6 +121,26 @@ namespace HC.Application.Service.Concrete
                 Status = x.Status
             },
             expression: x => x.Status == Domain.Enums.Status.Active || x.Status == Domain.Enums.Status.Updated || x.Status == Domain.Enums.Status.Deleted);
+
+            return productList;
+        }
+
+        public async Task<List<ProductVM>> GetProductsByCategory(Guid subCategoryId)
+        {
+            var productList = await _unitOfWork.ProductRepository.GetFilteredFirstOrDefaults(x => new ProductVM
+            {
+                ID = x.ID,
+                ProductName = x.ProductName,
+                Description = x.Description,
+                UnitPrice = x.UnitPrice,
+                UnitsInStock = x.UnitsInStock,
+                ImagePath = x.ImagePath,
+                SubCategoryName = x.SubCategory.SubCategoryName,
+                Status = x.Status
+            },
+            expression: x=>x.SubCategoryId == subCategoryId && x.Status != Domain.Enums.Status.Deleted,
+            orderBy: x=> x.OrderBy(z=>z.UnitPrice)
+            );
 
             return productList;
         }

@@ -1,0 +1,33 @@
+﻿@model List<ProductVM>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<div class="row product-list">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4">
+        <section class="panel">
+            <div class="pro-img-box">
+                @if (@product.ImagePath != null)
+                {
+                        <img src="@product.ImagePath" alt="product img">
+                    }
+                    else
+                    {
+                        <img src="~/Content/img/product3.png"/>
+                    }
+                <a href="#" class="adtocart">
+                    <i class="icon-shopping-cart"></i>
+                </a>
+            </div>
+
+            <div class="panel-body text-center">
+                <h4>
+                    <a asp-action="Details" asp-controller="Home" asp-route-id="@product.ID">@product.ProductName</a>
+                </h4>
+                <p class="price">@product.UnitPrice.ToString("C2")</p>
+            </div>
+        </section>
+    </div>
+    }    
+</div>

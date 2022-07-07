@@ -18,8 +18,8 @@ namespace HC.Application.Service.Interface
         Task<string> Update(UpdateProductDTO model);
         //List
         Task<List<ProductVM>> GetProducts();
-
         Task<List<ProductVM>> GetDefaultProducts();
+        Task<List<ProductVM>> GetProductsByCategory(Guid subCategoryId);
         //Find
         Task<UpdateProductDTO> GetById(Guid id);
     }

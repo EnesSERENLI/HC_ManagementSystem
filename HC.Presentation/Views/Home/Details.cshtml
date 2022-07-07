@@ -4,63 +4,66 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="col-md-9">
+<div class="container">
+    <div class="row">
 
-                      <section class="panel">
-                          <div class="panel-body">
-                              <div class="col-md-6">
-                                  <div class="pro-img-details">
-                                      <div class="pro-img-list">
-                                      @if (Model.ImagePath != null)
-                                      {
-                                          <img src="@Model.ImagePath"/>
-                                      }
-                                      else{
-                                          <img src="~/Content/img/product3.png" alt="">
-                                      }
-                                  </div>
-                                  </div>                                  
-                              </div>
-                              <div class="col-md-6">
-                                  <h4 class="pro-d-title">
-                                      <label asp-for="ProductName">@Model.ProductName</label>
-                                  </h4>
-                                  <label asp-for="Description">@Model.Description</label>
-                                  <div class="product_meta">
-                                      <span class="posted_in"> <strong>Categories:</strong> <a rel="tag" href="#"><label asp-for="SubCategoryName">@Model.SubCategoryName</label></a></span>
-                                      <span class="tagged_as"><strong>Tags:</strong> <a rel="tag" href="#">Delicious</a>, <a rel="tag" href="#">Excellent</a>.</span>
-                                  </div>
-                                  <div class="m-bot15"> <strong>Price : </strong><span class="pro-price">@Model.UnitPrice.ToString("C2")</span></div>
-                                  <div class="form-group">
-                                      <label>Quantity</label>
-                                      <input type="number" placeholder="1" class="form-control quantity">
-                                  </div>
-                                  <p>
-                                      <button class="btn btn-round btn-danger" type="button"><i class="icon-shopping-cart"></i> Add to Cart</button>
-                                  </p>
-                              </div>
-                          </div>
-                      </section>
+    <section class="panel">
+        <div class="panel-body">
+            <div class="col-md-6">
+                <div class="pro-img-details">
+                    <div class="pro-img-list">
+                        @if (Model.ImagePath != null)
+                        {
+                            <img src="@Model.ImagePath" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/img/product3.png" alt="">
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4 class="pro-d-title">
+                    <label asp-for="ProductName">@Model.ProductName</label>
+                </h4>
+                <label asp-for="Description">@Model.Description</label>
+                <div class="product_meta">
+                    <span class="posted_in"> <strong>Categories:</strong> <a rel="tag" href="#"><label asp-for="SubCategoryName">@Model.SubCategoryName</label></a></span>
+                    <span class="tagged_as"><strong>Tags:</strong> <a rel="tag" href="#">Delicious</a>, <a rel="tag" href="#">Excellent</a>.</span>
+                </div>
+                <div class="m-bot15"> <strong>Price : </strong><span class="pro-price">@Model.UnitPrice.ToString("C2")</span></div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" placeholder="1" class="form-control quantity">
+                </div>
+                <p>
+                    <button class="btn btn-round btn-danger" type="button"><i class="icon-shopping-cart"></i> Add to Cart</button>
+                </p>
+            </div>
+        </div>
+    </section>
 
-                      <section class="panel">
-                          <header class="panel-heading tab-bg-dark-navy-blue">
-                              <ul class="nav nav-tabs ">
-                                  <li class="active">
-                                      <a data-toggle="tab" href="#description">
-                                          Description
-                                      </a>
-                                  </li>
-                              </ul>
-                          </header>
-                          <div class="panel-body">
-                              <div class="tab-content tasi-tab">
-                                  <div id="description" class="tab-pane active">
-                                      <h4 class="pro-d-head">Product Description</h4>
-                                      <p>@Model.Description</p>
-                                  </div>
-                              </div>
-                          </div>
-                      </section>
-                      @await Component.InvokeAsync("SampleProducts",new{id = @Model.SubCategoryId})
-                  </div>
+    <section class="panel">
+        <header class="panel-heading tab-bg-dark-navy-blue">
+            <ul class="nav nav-tabs ">
+                <li class="active">
+                    <a data-toggle="tab" href="#description">
+                        Description
+                    </a>
+                </li>
+            </ul>
+        </header>
+        <div class="panel-body">
+            <div class="tab-content tasi-tab">
+                <div id="description" class="tab-pane active">
+                    <h4 class="pro-d-head">Product Description</h4>
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    @await Component.InvokeAsync("SampleProducts",new{id = @Model.SubCategoryId})
+</div>
+</div>
 

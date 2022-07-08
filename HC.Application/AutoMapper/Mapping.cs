@@ -21,7 +21,6 @@ namespace HC.Application.AutoMapper
 
             CreateMap<Department, CreateDepartmentDTO>().ReverseMap();
                 //.ForMember(x => x.CreatedIP, option => option.Ignore())
-
             CreateMap<Department, DepartmentVM>().ReverseMap();
             CreateMap<Department, UpdateDepartmentDTO>().ReverseMap();
             CreateMap<UpdateDepartmentDTO, DepartmentVM>().ReverseMap();
@@ -43,6 +42,7 @@ namespace HC.Application.AutoMapper
 
             CreateMap<AppUser, LoginDTO>().ReverseMap();
             CreateMap<AppUser, RegisterDTO>().ReverseMap();
+            CreateMap<AppUser, AppUserVM>().ReverseMap();
         }
     }
 }

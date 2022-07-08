@@ -30,6 +30,7 @@ builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<ISubCategoryService, SubCategoryService>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+builder.Services.AddTransient<IAppUserService, AppUserService>();
 
 //AutoMapper
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -42,7 +43,39 @@ var mapperConfig = new MapperConfiguration(cfg =>
 
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//builder.Services.AddIdentity<AppUser,IdentityRole>().AddEntityFrameworkStores<HotCatDbContext>();
+
+//Identity
+builder.Services.Configure<IdentityOptions>(x =>
+{
+    //sifre yapilandirmasi
+    x.Password.RequiredLength = 3;
+    x.Password.RequireDigit = false;
+    x.Password.RequireLowercase = false;
+    x.Password.RequireUppercase = false;
+    x.Password.RequireNonAlphanumeric = false;
+    //giris yapilandirmasi
+    x.SignIn.RequireConfirmedPhoneNumber = false;
+    x.SignIn.RequireConfirmedAccount = false;
+    x.SignIn.RequireConfirmedEmail = true;
+    x.User.RequireUniqueEmail = false;
+});
+
+//Cookies
+builder.Services.ConfigureApplicationCookie(x =>
+{
+    x.LoginPath = new PathString("/Home/index");
+    x.AccessDeniedPath = new PathString("/Account/SignIn");
+
+    x.Cookie = new CookieBuilder()
+    {
+        Name = "HotCatCerez"
+    };
+    x.SlidingExpiration = true;
+    x.ExpireTimeSpan = TimeSpan.FromDays(1);
+});
+
+builder.Services.AddDefaultIdentity<AppUser>()
     .AddEntityFrameworkStores<HotCatDbContext>();
 
 //DependencyResolver

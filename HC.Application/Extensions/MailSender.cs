@@ -14,7 +14,7 @@ namespace HC.Application.Extensions
         {
             //Sender
             MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("yzl3156yzl@gmail.com", "HotCat Restaurant");
+            mail.From = new MailAddress("Yzl3156yzl@gmail.com", "HotCat Restaurant");
             mail.To.Add(email);
             mail.Subject = subject;
             mail.Body = message;
@@ -22,7 +22,7 @@ namespace HC.Application.Extensions
 
             //Smtp
             SmtpClient smtp = new SmtpClient();
-            smtp.Credentials = new NetworkCredential("yzl3156yzl@gmail.com", "enter your password");
+            smtp.Credentials = new NetworkCredential("Yzl3156yzl@gmail.com", "enter ur password");
             smtp.Port = 587;
             smtp.Host = "smtp.gmail.com";
             smtp.EnableSsl = true;

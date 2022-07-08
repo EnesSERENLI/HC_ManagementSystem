@@ -18,6 +18,8 @@ namespace HC.Presentation.Controllers
             _appUserService = appUserService;
             _userManager = userManager;
         }
+
+        #region Register
         public IActionResult Register()
         {
             return View();
@@ -32,23 +34,37 @@ namespace HC.Presentation.Controllers
                 var result = await _appUserService.Register(model);
                 if (result.Succeeded)
                 {
-                    var user = await _userManager.FindByNameAsync(model.Email); //kullaniciyi email üzerinde kontrol et.
-                    MailSender.SendMail(user.Email, "<h2 style='color:green;'>Hotcat Activation</h2> <hr />", " Please click the link below to activate your subscription <br />https://localhost:7149/Account/Activation/" + user.Id);
-                    return RedirectToAction("Pending");
+                    var user = await _userManager.FindByEmailAsync(model.Email); //kullaniciyi email üzerinde kontrol et.
+                    //MailSender.SendMail(user.Email, "<h2 style='color:green;'>Hotcat Activation</h2> <hr />", " Please click the link below to activate your subscription <br />https://localhost:7149/Account/Activation/" + user.Id);
+                    //Mail atma olayında sıkıntı var güvenlik onaylarından dolayı şimdilik pending sayfasından onaylatma işlemini yaptırıyorum.
+                    return RedirectToAction("Pending", "Account", user, null);
                 }
+                foreach (var item in result.Errors)
+                {
+                    TempData["message"] = item.Description;
+                }
+                return View();
+            }
+            foreach (var item in results.Errors)
+            {
+                TempData["message"] = item.ErrorMessage;
             }
             return View(model);
         }
+        #endregion
 
-        public IActionResult Pending()
+        #region Pending
+        public IActionResult Pending(AppUser user)
         {
-            return View();
-        }
+            return View(user);
+        } 
+        #endregion
 
+        #region Activation
         public async Task<IActionResult> Activation(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-            
+
             if (user != null)
             {
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -63,7 +79,12 @@ namespace HC.Presentation.Controllers
                 return RedirectToAction("Register");
             }
             return RedirectToAction("Register");
-        }
+        } 
+        #endregion
 
+        public async Task<IActionResult> SignIn()
+        {
+            return View();
+        }
     }
 }

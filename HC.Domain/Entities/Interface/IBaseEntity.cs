@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HC.Domain.Entities.Interface
 {
-    public interface IBaseEntity:IEntity<Guid> //BaseEntity could be an abstract class, but since we will inherit from more than one class in user classes, we took it as interface.
+    public interface IBaseEntity//:IEntity<Guid> //BaseEntity could be an abstract class, but since we will inherit from more than one class in user classes, we took it as interface.
     {
         public Status Status { get; set; }
         //When data added.

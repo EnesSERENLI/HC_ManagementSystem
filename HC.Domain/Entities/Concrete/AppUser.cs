@@ -15,7 +15,7 @@ namespace HC.Domain.Entities.Concrete
         {
             Status = Status.Active;
         }
-        public Guid ID { get; set; }
+        //public Guid ID { get; set; }
         public string FullName { get; set; }
         public DateTime? BirthDate { get; set; }
         public string ImagePath { get; set; }

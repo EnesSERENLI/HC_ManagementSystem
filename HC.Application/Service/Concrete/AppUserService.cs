@@ -42,7 +42,7 @@ namespace HC.Application.Service.Concrete
                 ConfirmPassword = x.PasswordHash,
                 ImagePath = x.ImagePath
             },
-            expression: x=> x.Id == id && x.Status != Domain.Enums.Status.Deleted);
+            expression: x => x.Id == id && x.Status != Domain.Enums.Status.Deleted);
 
             var updateUser = _mapper.Map<UpdateUserDTO>(user);
 
@@ -51,7 +51,7 @@ namespace HC.Application.Service.Concrete
 
         public async Task<AppUserVM> GetByUser(string id)
         {
-            var user = await _unitOfWork.AppUserRepository.GetFilteredFirstOrDefault(selector: x=> new AppUserVM
+            var user = await _unitOfWork.AppUserRepository.GetFilteredFirstOrDefault(selector: x => new AppUserVM
             {
                 Id = x.Id,
                 FullName = x.FullName,
@@ -60,7 +60,7 @@ namespace HC.Application.Service.Concrete
                 Address = x.Address,
                 ImagePath = x.ImagePath
             },
-            expression: x=> x.Id == id && x.Status != Domain.Enums.Status.Deleted);
+            expression: x => x.Id == id && x.Status != Domain.Enums.Status.Deleted);
 
             return user;
         }
@@ -79,7 +79,7 @@ namespace HC.Application.Service.Concrete
         {
             var newUser = _mapper.Map<AppUser>(model);
 
-            var result = await _userManager.CreateAsync(newUser,model.Password);
+            var result = await _userManager.CreateAsync(newUser, model.Password);
 
             return result;
         }

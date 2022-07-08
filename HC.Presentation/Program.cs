@@ -44,6 +44,7 @@ var mapperConfig = new MapperConfiguration(cfg =>
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
 //builder.Services.AddIdentity<AppUser,IdentityRole>().AddEntityFrameworkStores<HotCatDbContext>();
+builder.Services.AddDefaultIdentity<AppUser>().AddEntityFrameworkStores<HotCatDbContext>();
 
 //Identity
 builder.Services.Configure<IdentityOptions>(x =>
@@ -75,8 +76,7 @@ builder.Services.ConfigureApplicationCookie(x =>
     x.ExpireTimeSpan = TimeSpan.FromDays(1);
 });
 
-builder.Services.AddDefaultIdentity<AppUser>()
-    .AddEntityFrameworkStores<HotCatDbContext>();
+
 
 //DependencyResolver
 

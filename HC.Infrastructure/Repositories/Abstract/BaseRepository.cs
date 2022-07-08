@@ -97,9 +97,9 @@ namespace HC.Infrastructure.Repositories.Abstract
         {
             try
             {
-                T updated = await GetById(model.ID);
-                _db.Entry(updated).CurrentValues.SetValues(model);
-                _db.Entry(updated).State = EntityState.Modified;
+                //T updated = await GetById(model.ID);
+                //_db.Entry(updated).CurrentValues.SetValues(model);
+                _db.Entry<T>(model).State = EntityState.Modified;
                 _db.SaveChanges();
 
                 return "Data Updated";

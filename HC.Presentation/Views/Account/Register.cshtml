@@ -1,0 +1,67 @@
+﻿@model RegisterDTO
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HotCat Restaurant Registration</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="~/Content/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <link href="~/Content/css/style-responsive.css" rel="stylesheet">
+</head>
+
+<body class="login-body">
+    <div class="container">
+
+
+        <form class="form-signin" method="post">
+            <h2 class="form-signin-heading">registration now</h2>
+            <div class="login-wrap">
+                <div class="alert-error text-success">
+                    @if (TempData["message"] != null)
+                    {
+                        <div class="alert alert-danger alert-block fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="icon-remove"></i>
+                            </button>
+                            <h4>
+                                <i class="icon-ok-sign"></i>
+                                Error!
+                            </h4>
+                            <p>@TempData["message"]</p>
+                        </div>
+                    }
+                </div>
+                <p>Enter your personal details below</p>
+                <input type="text" class="form-control" placeholder="FullName" asp-for="FullName">
+                <input type="text" class="form-control" placeholder="Address" asp-for="Address">
+                <input type="text" class="form-control" placeholder="Email" asp-for="Email">
+                <input type="text" class="form-control" placeholder="UserName" asp-for="UserName">
+                <input type="password" class="form-control" placeholder="Password" asp-for="Password">
+                <input type="password" class="form-control" placeholder="Re-type Password" asp-for="ConfirmPassword">
+                <label class="checkbox">
+                    <input type="checkbox" value="agree this condition"> I agree to the Terms of Service and Privacy Policy
+                </label>
+                <button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
+
+                <div class="registration">
+                    Already Registered.
+                    <a asp-action="Login" asp-controller="Account">
+                        Login
+                    </a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <script src="~/Content/js/jquery.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+</body>
+</html>

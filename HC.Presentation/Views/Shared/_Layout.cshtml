@@ -1,4 +1,4 @@
-﻿
+﻿@model AppUserVM
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +12,7 @@
     <title>HotCat Restaurant</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">    
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
     <link href="~/Content/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -32,33 +32,59 @@
         <!--header start-->
         <header class="header white-bg">
             <div class="sidebar-toggle-box">
-            <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+                <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
             </div>
             <!--logo start-->
             <a href="/Home/index" class="logo">HotCat<span> Restaurant</span></a>
             <!--logo end-->
             <div class="top-nav ">
-            <!--search & user info start-->
-            <ul class="nav pull-right top-menu">
-            <!-- user login dropdown start-->
-            <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            <img alt="" src="~/Content/img/avatar1_small.jpg">
-            <span class="username">Jhon Doue</span>
-            </a>
-            <ul class="dropdown-menu extended logout">
-            <div class="log-arrow-up"></div>
-            <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
-            <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
-            <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
-            <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
-            </ul>
-            </li>
-            <!-- user login dropdown end -->
-            </ul>
-            <!--search & user info end-->
+                <!--search & user info start-->
+                @if (User?.Identity?.IsAuthenticated ?? false)
+                {
+                    <ul class="nav pull-right top-menu">
+                        <!-- user login dropdown start-->
+                    <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                @if (Model != null)
+                                {
+                                    if(@Model.ImagePath != null)
+                                    {
+                                        <img alt="" src="@Model.ImagePath">
+                                    }
+                                    <img alt="" src="~/Content/img/avatar1_small.jpg">
+                                    <span class="username">@Model.UserName</span>
+                                }
+                            </a>
+                            <ul class="dropdown-menu extended logout">
+                                <div class="log-arrow-up"></div>
+                                <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
+                                <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
+                                <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
+                                <li><a asp-action="LogOut" asp-controller="Account"><i class="icon-key"></i>@User.Identity.Name, Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav nav-tabs pull-right">
+                        <li style="border-right:solid 1px;">
+                            <a asp-action="Index" asp-controller="Home">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li style="border-right:solid 1px;">
+                            <a asp-action="Register" asp-controller="Account"><i class="icon-user"> </i>Register</a>
+                        </li>
+                        <li>
+                            <a asp-action="SignIn" asp-controller="Account"><i class="icon-user"> </i>Login</a>
+                        </li>
+                    </ul>
+                }
+
+
             </div>
-            </header>
+        </header>
         <!--header end-->
         <!--sidebar start-->
         <aside>
@@ -69,39 +95,40 @@
                         <a class="active" href="/Home/index">
                             <i class="icon-dashboard"></i>
                             <span>Anasayfa</span>
-                        </a>    
+                        </a>
                     </li>
-                     <!--multi level menu start-->
+                    <!--multi level menu start-->
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="icon-sitemap"></i>
-                            <span>Kategoriler</span>
+                            <span>Categories</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="/Home/index">Bütün Menüler</a></li>
+                            <li><a href="/Home/index">All Menus</a></li>
                             <li class="sub-menu">
-                                <a href="boxed_page.html">Kore Yemekleri</a>
-                                <ul class="sub">                                  
-                                    <li><a asp-action="index" asp-controller="home">Korean Ramen</a></li>                           
+                                <a href="boxed_page.html">Korean Food</a>
+                                <ul class="sub">
+                                    <li><a asp-action="index" asp-controller="home">Korean Ramen</a></li>
                                 </ul>
                             </li>
                             <li class="sub-menu">
-                                <a href="boxed_page.html">Çin Yemekleri</a>
-                                <ul class="sub">                                    
-                                    <li><a asp-action="index" asp-controller="home">China Ramen</a></li>                                                         
+                                <a href="boxed_page.html">China Food</a>
+                                <ul class="sub">
+                                    <li><a asp-action="index" asp-controller="home">China Ramen</a></li>
                                 </ul>
                             </li>
                             <li class="sub-menu">
-                                <a href="boxed_page.html">Japon Yemekleri</a>
-                                <ul class="sub">                                     
-                                    <li><a asp-action="index" asp-controller="home">Japan Ramen</a></li>                                                           
+                                <a href="boxed_page.html">Japan Food</a>
+                                <ul class="sub">
+                                    <li><a asp-action="index" asp-controller="home">Japan Ramen</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
                     <!--multi level menu end-->
-
-                    <li class="sub-menu">
+                    @if (User.IsInRole("admin"))
+                    {
+                         <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="icon-glass"></i>
                             <span>Admin Page</span>
@@ -116,12 +143,13 @@
                             <li><a asp-area="admin" asp-controller="orderdetail" asp-action="index">Order Details</a></li>
                         </ul>
                     </li>
+                    }
                     <li>
-                        <a href="login.html">
+                        <a asp-action="SignIn" asp-controller="Account">
                             <i class="icon-user"></i>
                             <span>Login Page</span>
                         </a>
-                    </li>                  
+                    </li>
                 </ul>
                 <!-- sidebar menu end-->
             </div>

@@ -24,28 +24,31 @@
         <form class="form-signin" method="post">
             <h2 class="form-signin-heading">registration now</h2>
             <div class="login-wrap">
-                <div class="alert-error text-success">
+                <div asp-validation-summary="All" class="alert-error text-danger">
                     @if (TempData["message"] != null)
                     {
-                        <div class="alert alert-danger alert-block fade in">
-                            <button data-dismiss="alert" class="close close-sm" type="button">
-                                <i class="icon-remove"></i>
-                            </button>
-                            <h4>
-                                <i class="icon-ok-sign"></i>
-                                Error!
-                            </h4>
-                            <p>@TempData["message"]</p>
-                        </div>
+                        <p class="alert-danger">@TempData["message"]</p>
                     }
                 </div>
                 <p>Enter your personal details below</p>
+                <span asp-validation-for="FullName" class="text-danger"></span>
                 <input type="text" class="form-control" placeholder="FullName" asp-for="FullName">
+
+                <span asp-validation-for="Address" class="text-danger"></span>
                 <input type="text" class="form-control" placeholder="Address" asp-for="Address">
+
+                <span asp-validation-for="Email" class="text-danger"></span>
                 <input type="text" class="form-control" placeholder="Email" asp-for="Email">
+
+                <span asp-validation-for="UserName" class="text-danger"></span>
                 <input type="text" class="form-control" placeholder="UserName" asp-for="UserName">
+
+                <span asp-validation-for="Password" class="text-danger"></span>
                 <input type="password" class="form-control" placeholder="Password" asp-for="Password">
+
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 <input type="password" class="form-control" placeholder="Re-type Password" asp-for="ConfirmPassword">
+
                 <label class="checkbox">
                     <input type="checkbox" value="agree this condition"> I agree to the Terms of Service and Privacy Policy
                 </label>
@@ -53,7 +56,7 @@
 
                 <div class="registration">
                     Already Registered.
-                    <a asp-action="Login" asp-controller="Account">
+                    <a asp-action="SignIn" asp-controller="Account">
                         Login
                     </a>
                 </div>

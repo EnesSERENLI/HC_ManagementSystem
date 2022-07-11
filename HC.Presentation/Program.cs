@@ -50,7 +50,7 @@ builder.Services.AddDefaultIdentity<AppUser>().AddEntityFrameworkStores<HotCatDb
 builder.Services.Configure<IdentityOptions>(x =>
 {
     //sifre yapilandirmasi
-    x.Password.RequiredLength = 3;
+    x.Password.RequiredLength = 6;
     x.Password.RequireDigit = false;
     x.Password.RequireLowercase = false;
     x.Password.RequireUppercase = false;

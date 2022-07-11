@@ -1,0 +1,113 @@
+﻿@model LoginDTO
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignIn</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="~/Content/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <link href="~/Content/css/style-responsive.css" rel="stylesheet">
+</head>
+<body class="login-body" style="">
+
+    <div class="container">
+
+        <form class="form-signin" asp-action="SignIn" method="post">
+            <h2 class="form-signin-heading">sign in now</h2>
+            <div class="login-wrap">
+                <div asp-validation-summary="All" class="alert-error text-danger">
+                    @if (TempData["message"] != null)
+                    {
+                        <p class="text-danger">@TempData["message"]</p>
+                    }
+                </div>
+                <label asp-for="UserName"></label> <br />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+                <input type="text" class="form-control" asp-for="UserName" placeholder="UserName">                
+
+                <label asp-for="Password"></label> <br />
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <input type="password" class="form-control" asp-for="Password" placeholder="Password">
+                
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me"> Remember me
+                    <span class="pull-right">
+                        <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+
+                    </span>
+                </label>
+                <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
+                <p>or you can sign in via social network</p>
+                <div class="login-social-link">
+                    <a href="#" class="facebook">
+                        <i class="icon-facebook"></i>
+                        Facebook
+                    </a>
+                    <a href="#" class="twitter">
+                        <i class="icon-twitter"></i>
+                        Twitter
+                    </a>
+                </div>
+                <div class="registration">
+                    Don't have an account yet?
+                    <a asp-action="Register">
+                        Create an account
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Forgot Password ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Enter your e-mail address below to reset your password.</p>
+                            <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                            <button class="btn btn-success" type="button">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+
+        </form>
+
+    </div>
+
+
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="~/Content/js/jquery.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+
+
+
+    <!-- Visual Studio Browser Link -->
+    <script type="text/javascript" src="https://localhost:44399/526983b8a1704928be0c61e15cd167b3/browserLink" async="async" id="__browserLink_initializationData" data-requestid="04220ce2f60746a6bc6f50d6f534bfc3" data-requestmappingfromserver="False"></script>
+    <!-- End Browser Link -->
+
+    <script src="/_framework/aspnetcore-browser-refresh.js"></script>
+
+    <live-preview-root></live-preview-root>
+</body>
+</html>

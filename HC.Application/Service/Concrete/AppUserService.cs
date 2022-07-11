@@ -65,9 +65,21 @@ namespace HC.Application.Service.Concrete
             return user;
         }
 
-        public Task<SignInResult> Login(LoginDTO model)
+        public async Task<SignInResult> Login(LoginDTO model)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByNameAsync(model.UserName);
+
+            SignInResult result;
+            if (user != null)
+            {
+                result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+
+                return result;
+            }
+
+            result = SignInResult.Failed;
+
+            return result;
         }
 
         public async Task LogOut()
@@ -79,7 +91,17 @@ namespace HC.Application.Service.Concrete
         {
             var newUser = _mapper.Map<AppUser>(model);
 
-            var result = await _userManager.CreateAsync(newUser, model.Password);
+            var anyUser = await _unitOfWork.AppUserRepository.Any(x=>x.Email == model.Email);
+
+            IdentityResult result;
+            if (!anyUser)
+            {
+                result = await _userManager.CreateAsync(newUser, model.Password);
+
+                return result;
+            }
+
+            result = IdentityResult.Failed();
 
             return result;
         }

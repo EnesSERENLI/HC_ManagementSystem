@@ -40,7 +40,7 @@ namespace HC.Application.Service.Concrete
             if (imageResult)
             {
                 using var image = Image.Load(model.Image.OpenReadStream());
-                image.Mutate(x => x.Resize(200, 200));
+                //image.Mutate(x => x.Resize(200, 200));
                 image.Save("wwwroot/Content/images/products/" + product.ProductName + imageUploader.GetExtension());
                 product.ImagePath = ("/Content/images/products/" + product.ProductName + imageUploader.GetExtension());
 
@@ -154,7 +154,7 @@ namespace HC.Application.Service.Concrete
             if (imageResult)
             {
                 using var image = Image.Load(model.Image.OpenReadStream());
-                image.Mutate(x => x.Resize(150, 150));
+                //image.Mutate(x => x.Resize(150, 150));
                 image.Save("wwwroot/Content/images/products/" + product.ProductName + imageUploader.GetExtension());
                 product.ImagePath = ("/Content/images/products/" + product.ProductName + imageUploader.GetExtension());
             }

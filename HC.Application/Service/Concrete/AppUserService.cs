@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using HC.Application.Extensions;
 using HC.Application.Models.DTO;
 using HC.Application.Models.VM;
 using HC.Application.Service.Interface;
 using HC.Domain.Entities.Concrete;
 using HC.Domain.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +52,7 @@ namespace HC.Application.Service.Concrete
             return updateUser;
         }
 
-        public async Task<AppUserVM> GetByUser(string id)
+        public async Task<AppUserVM> GetByUser(string userName)
         {
             var user = await _unitOfWork.AppUserRepository.GetFilteredFirstOrDefault(selector: x => new AppUserVM
             {
@@ -60,7 +63,7 @@ namespace HC.Application.Service.Concrete
                 Address = x.Address,
                 ImagePath = x.ImagePath
             },
-            expression: x => x.Id == id && x.Status != Domain.Enums.Status.Deleted);
+            expression: x => x.UserName == userName && x.Status != Domain.Enums.Status.Deleted);
 
             return user;
         }
@@ -91,7 +94,7 @@ namespace HC.Application.Service.Concrete
         {
             var newUser = _mapper.Map<AppUser>(model);
 
-            var anyUser = await _unitOfWork.AppUserRepository.Any(x=>x.Email == model.Email);
+            var anyUser = await _unitOfWork.AppUserRepository.Any(x => x.Email == model.Email);
 
             IdentityResult result;
             if (!anyUser)
@@ -106,9 +109,60 @@ namespace HC.Application.Service.Concrete
             return result;
         }
 
-        public Task UpdateUser(UpdateUserDTO model)
+        #region UpdateUserProfile
+        public async Task<string> UpdateUser(UpdateUserDTO model)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(model.Id);
+
+            if (user != null)
+            {
+                if (model.Image != null)
+                {
+                    ImageUploader imageUploader = new ImageUploader();
+                    var imageResult = imageUploader.IsValid(model.Image);
+
+                    if (imageResult)
+                    {
+                        var image = Image.Load(model.Image.OpenReadStream());
+                        image.Mutate(x => x.Resize(150, 150));
+                        image.Save("wwwroot/Content/images/users/" + user.UserName + imageUploader.GetExtension());
+                        user.ImagePath = ("/Content/images/users/" + user.UserName + imageUploader.GetExtension());
+                    }
+                }
+
+                if (model.FullName != null && model.FullName != user.FullName)
+                {
+                    user.FullName = model.FullName;
+                    _unitOfWork.AppUserRepository.Update(user);
+                }
+
+                if (model.Address != null && model.Address != user.Address)
+                {
+                    user.Address = model.Address;
+                    _unitOfWork.AppUserRepository.Update(user);
+                }
+
+                if (model.Password != null)
+                {
+                    user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password);
+                    await _userManager.UpdateAsync(user);
+                }
+
+                if (model.UserName != null && model.UserName != user.UserName)
+                {
+                    await _userManager.SetUserNameAsync(user, model.UserName);
+                }
+
+                if (model.Email != null && model.Email != user.Email)
+                {
+                    await _userManager.SetEmailAsync(user, model.Email);
+                }
+
+                return "Your profile has been updated!";
+            }
+
+            return "Your profile hasn't been updated!";
         }
+        #endregion
     }
 }

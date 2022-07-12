@@ -19,8 +19,8 @@ namespace HC.Application.Service.Interface
         Task<SignInResult> Login(LoginDTO model);
 
         Task LogOut();
-        Task UpdateUser(UpdateUserDTO model);
+        Task<string> UpdateUser(UpdateUserDTO model);
         Task<UpdateUserDTO> GetById(string id);
-        Task<AppUserVM> GetByUser(string id);
+        Task<AppUserVM> GetByUser(string userName);
     }
 }

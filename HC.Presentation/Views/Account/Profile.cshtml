@@ -1,0 +1,42 @@
+﻿@model AppUserVM
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <aside class="profile-nav col-lg-3">
+        <section class="panel">
+            <div class="user-heading round">
+                @if (@Model.ImagePath == null)
+                {
+                    <a asp-action="Profile" asp-route-userName="@Model.UserName">
+                        <img src="~/Content/img/profile-avatar.jpg" alt="">
+                    </a>
+                }
+                else
+                {
+                    <a asp-action="Profile" asp-route-userName="@Model.UserName">
+                        <img src="@Model.ImagePath" alt="">
+                    </a>
+                }
+                <h1>@Model.FullName</h1>
+                <p>@Model.Email</p>
+            </div>
+
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a asp-action="Profile" asp-route-userName="@Model.UserName"> <i class="icon-user"></i> Profile</a></li>
+                <li><a asp-action="EditProfile" asp-controller="Account" asp-route-userName="@Model.UserName"> <i class="icon-edit"></i> Edit profile</a></li>
+            </ul>
+
+        </section>
+    </aside>
+    <aside class="profile-info col-lg-9">
+        @if (TempData["message"] != null)
+        {
+            <p class="alert-success">@TempData["message"]</p>
+        }
+        @await Component.InvokeAsync("Profile",new{userName = User.Identity.Name})
+    </aside>
+</div>
+

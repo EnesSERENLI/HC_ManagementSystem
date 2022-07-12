@@ -60,7 +60,11 @@ namespace HC.Presentation.Controllers
         [AllowAnonymous]
         public IActionResult Pending(AppUser user)
         {
-            return View(user);
+            if (user != null)
+                return View(user);
+            
+            else
+                return RedirectToAction("Register");          
         } 
         #endregion
 
@@ -127,9 +131,62 @@ namespace HC.Presentation.Controllers
             await _appUserService.LogOut();
 
             return RedirectToAction("Index", "Home");
+        }
+        #endregion
+
+        #region ProfilePage
+        public async Task<IActionResult> Profile(string userName)
+        {
+            if (User.Identity.Name == userName)
+            {
+                var user = await _appUserService.GetByUser(userName);
+
+                if (user != null)
+                {
+                    return View(user);
+                }
+
+            }
+            return RedirectToAction("Index", "Home");
         } 
         #endregion
 
+        public async Task<IActionResult> EditProfile(string userName)
+        {
+            if (User.Identity.Name == userName)
+            {
+                var user = await _appUserService.GetByUser(userName);
 
+                if (user != null)
+                {
+                    var updatedUser =  await _appUserService.GetById(user.Id);
+                    return View(updatedUser);
+                }
+                return NotFound();
+            }
+
+            return RedirectToAction("SignIn");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProfile(UpdateUserDTO model)
+        {
+            UpdateUserDTOValidation validator = new UpdateUserDTOValidation();
+            var resultValidator = validator.Validate(model);
+            if (resultValidator.IsValid)
+            {
+                TempData["message"] = await _appUserService.UpdateUser(model);
+                var user =await _userManager.FindByIdAsync(model.Id);
+                return RedirectToAction("Profile","Account",new {userName = user.UserName},null);
+            }
+            else
+            {
+                foreach (var item in resultValidator.Errors)
+                {
+                    TempData["message"] += item.ErrorMessage + "\n";
+                }
+                return View(model);
+            }
+        }
     }
 }

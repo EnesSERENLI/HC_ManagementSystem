@@ -92,33 +92,10 @@ namespace HC.Infrastructure.UnitOfWork
             }
         }
 
-        //public async Task Commit()
-        //{
-        //    await _db.SaveChangesAsync();
-        //}
+        public async Task Approve()
+        {
+            await _db.SaveChangesAsync();
+        }
 
-        //private bool isDispose = false;
-        //public async ValueTask DisposeAsync()
-        //{
-        //    if (!isDispose)
-        //    {
-        //        isDispose = true;
-        //        await DisposeAsync(true);
-        //        GC.SuppressFinalize(this);
-        //    }
-        //}
-
-        //private async Task DisposeAsync(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        await _db.DisposeAsync();
-        //    }
-        //}
-
-        //public async Task executeSqlRaw(string sql, params object[] parameters)
-        //{
-        //    await _db.Database.ExecuteSqlRawAsync(sql, parameters);
-        //}
     }
 }

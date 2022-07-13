@@ -11,7 +11,10 @@ namespace HC.Domain.Entities.Concrete
 {
     public class AppUserRole : IdentityRole, IBaseEntity
     {
-        public Guid ID { get; set; }
+        public AppUserRole()
+        {
+            Status = Status.Active;
+        }
         public Status Status { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedComputerName { get; set; }

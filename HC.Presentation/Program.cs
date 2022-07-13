@@ -31,6 +31,7 @@ builder.Services.AddTransient<ISubCategoryService, SubCategoryService>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
 builder.Services.AddTransient<IAppUserService, AppUserService>();
+builder.Services.AddTransient<IRoleService, RoleService>();
 
 //AutoMapper
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

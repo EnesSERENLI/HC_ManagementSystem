@@ -16,9 +16,7 @@ namespace HC.Domain.UnitOfWork
         IDepartmentRepository DepartmentRepository { get; }
         IProductRepository ProductRepository { get; }
 
-        //Task Commit();
+        Task Approve(); //for SaveChanges
 
-
-        //Task executeSqlRaw(string sql, params object[] parameters);
     }
 }

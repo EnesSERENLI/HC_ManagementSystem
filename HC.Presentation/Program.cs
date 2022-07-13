@@ -44,8 +44,8 @@ var mapperConfig = new MapperConfiguration(cfg =>
 
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
-//builder.Services.AddIdentity<AppUser,IdentityRole>().AddEntityFrameworkStores<HotCatDbContext>();
-builder.Services.AddDefaultIdentity<AppUser>().AddEntityFrameworkStores<HotCatDbContext>();
+builder.Services.AddIdentity<AppUser,AppUserRole>().AddEntityFrameworkStores<HotCatDbContext>();
+//builder.Services.AddDefaultIdentity<AppUser>().AddEntityFrameworkStores<HotCatDbContext>();
 
 //Identity
 builder.Services.Configure<IdentityOptions>(x =>
@@ -126,6 +126,6 @@ app.UseEndpoints(x => {
     );
 });
 
-app.MapRazorPages();
+//app.MapRazorPages();
 
 app.Run();

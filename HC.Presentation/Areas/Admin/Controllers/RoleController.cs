@@ -1,6 +1,8 @@
 ﻿using HC.Application.Models.DTO;
 using HC.Application.Service.Interface;
 using HC.Application.Validation.FluentValidation;
+using HC.Domain.Entities.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HC.Presentation.Areas.Admin.Controllers
@@ -9,10 +11,12 @@ namespace HC.Presentation.Areas.Admin.Controllers
     public class RoleController : Controller
     {
         private readonly IRoleService _roleService;
+        private readonly RoleManager<AppUserRole> _roleManager;
 
-        public RoleController(IRoleService roleService)
+        public RoleController(IRoleService roleService,RoleManager<AppUserRole> roleManager)
         {
             _roleService = roleService;
+            _roleManager = roleManager;
         }
         public IActionResult Index()
         {
@@ -29,12 +33,16 @@ namespace HC.Presentation.Areas.Admin.Controllers
             var resultValidate = validator.Validate(model);
             if (resultValidate.IsValid)
             {
-                TempData["message"] = await _roleService.Create(model);
-                return RedirectToAction("Index");
+                var message = await _roleService.Create(model);
+                TempData["message"] = message;
+                if (message == "Role has been created!")
+                    return RedirectToAction("Index");
+                else
+                    return View();
             }
             foreach (var item in resultValidate.Errors)
             {
-                TempData["mesage"] += item.ErrorMessage + "\n";
+                TempData["message"] += item.ErrorMessage + "\n";
             }
             return View(model);
         }

@@ -1,0 +1,41 @@
+﻿@model CreateRoleDTO
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-6">
+    <section class="panel">
+        <header class="panel-heading">
+            Add Role
+        </header>
+        <div class="panel-body">
+            <div class="alert-error text-danger">
+                @if (TempData["message"] != null)
+                {
+                    <div class="alert alert-danger alert-block fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <h4>
+                            <i class="icon-ok-sign"></i>
+                            Error!
+                        </h4>
+                        <p>@TempData["message"]</p>
+                    </div>
+                }
+            </div>
+            <form method="post" role="form" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input type="text" class="form-control round-input" asp-for="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <a asp-action="index" asp-controller="Role" asp-area="Admin" class="btn btn-info">Back to Index</a>
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+
+        </div>
+    </section>
+</div>

@@ -12,7 +12,8 @@ namespace HC.Application.Validation.FluentValidation
     {
         public CreateRoleDTOValidation()
         {
-            RuleFor(x => x.RoleName).NotEmpty().WithMessage("RoleName cannot be empty!").MinimumLength(3).WithMessage("min character :3");
+            RuleFor(x => x.Name).NotEmpty().WithMessage("RoleName cannot be empty!").MinimumLength(3).WithMessage("min character :3");
+            RuleFor(x => x.AppUsers).Empty();
         }
     }
 }

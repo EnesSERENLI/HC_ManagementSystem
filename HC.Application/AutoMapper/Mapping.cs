@@ -60,7 +60,9 @@ namespace HC.Application.AutoMapper
 
             #region Role
             CreateMap<IdentityRole, CreateRoleDTO>().ReverseMap();
+            CreateMap<AppUserRole, CreateRoleDTO>().ReverseMap();
             CreateMap<IdentityRole, UpdateRoleDTO>().ReverseMap();
+            CreateMap<AppUserRole, UpdateRoleDTO>().ReverseMap();
             CreateMap<UpdateRoleDTO, IdentityRole>().ReverseMap(); 
             #endregion
 

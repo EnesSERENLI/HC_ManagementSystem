@@ -91,6 +91,18 @@ namespace HC.Infrastructure.UnitOfWork
                 return _productRepository;
             }
         }
+        private IRoleRepository _roleRepository;
+        public IRoleRepository RoleRepository
+        {
+            get
+            {
+                if (_roleRepository == null)
+                {
+                    _roleRepository = new AppUserRoleRepository(_db);
+                }
+                return _roleRepository;
+            }
+        }
 
         public async Task Approve()
         {

@@ -1,4 +1,5 @@
 ﻿using HC.Application.Models.DTO;
+using HC.Domain.Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,9 @@ namespace HC.Application.Service.Interface
         Task<string> Delete(string id);
         //Find
         Task<UpdateRoleDTO> GetById(string id);
+        //Any
         Task<bool> IsRoleExist(string roleName);
         //List
-        IQueryable<IdentityRole> GetRolesList();        
+        IQueryable<AppUserRole> GetRolesList();        
     }
 }

@@ -1,16 +1,14 @@
 ﻿using HC.Domain.Entities.Concrete;
+using HC.Domain.Repositories.BaseRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HC.Application.Models.DTO
+namespace HC.Domain.Repositories.EntityTypeRepositoy
 {
-    public class CreateRoleDTO
+    public interface IRoleRepository :IBaseRepository<AppUserRole>
     {
-        public string Name { get; set; }
-
-        public List<AppUser> AppUsers { get; set; }
     }
 }

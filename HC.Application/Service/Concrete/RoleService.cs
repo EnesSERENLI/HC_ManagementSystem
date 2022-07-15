@@ -74,12 +74,11 @@ namespace HC.Application.Service.Concrete
             return roleExist;
         }
 
-        public async Task<string> Update(UpdateRoleDTO model)
+        public async Task<string> Update(UpdateRoleDTO model) //todo: ConcurrencyFailure(Eşzamanlılık) => hatası veriyor bu işleme sonra bakıcam.
         {
             var role = _mapper.Map<AppUserRole>(model);
 
             IdentityResult result = await _roleManager.UpdateAsync(role);
-            await _unitOfWork.Approve();
             if (result.Succeeded)
                 return "Role updated!";
             return "Role hasn't been updated!";

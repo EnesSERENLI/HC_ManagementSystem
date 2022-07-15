@@ -1,0 +1,158 @@
+﻿@model AssignedRoleToUsersDTO
+@{
+    ViewData["Title"] = "AssignedRoleToUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<div class="row">
+    <div class="col-lg-12">
+    <div class="card">
+    <div class="card-header text-center">
+    <h4 class="card-title">Assigned Role To Users</h4>
+    </div>
+    <div class="card-body">
+    <form asp-action="AssignedRoleToUsers" method="post">
+    <input type="hidden" asp-for="Role.Name" />
+    <div class="row">
+    <div class="col-6">
+    <h6 class="card-title">Add user to <span class="badge badge-primary">@Model.Role.Name</span></h6>
+    <table class="table table-hover">
+    @if (Model.HasNoRole.Count() == 0)
+    {
+    <tr>
+    <td>All user has a role..!</td>
+    </tr>
+    }
+    else
+    {
+    foreach (var user in Model.HasNoRole)
+    {
+    <tr>
+    <td>@user.UserName</td>
+    <td>
+    <input class="form-check-input" type="checkbox" value="@user.Id" name="AddIds" />
+    </td>
+    </tr>
+    }
+    }
+    </table>
+    </div>
+    <div class="col-6">
+    <h6 class="card-title">Remove User To <span class="badge badge-danger">@Model.Role.Name</span></h6>
+    <table class="table table-hover">
+    @if (Model.HasRole.Count() == 0)
+    {
+    <tr>
+    <td>Any users has a role..!</td>
+    </tr>
+    }
+    else
+    {
+    foreach (var user in Model.HasRole)
+    {
+    <tr>
+    <td>@user.UserName</td>
+    <td>
+    <input class="form-check-input" type="checkbox" value="@user.Id" name="DeleteIds" />
+    </td>
+    </tr>
+    }
+    }
+    </table>
+    </div>
+    </div>
+    <div class="form-group">
+    <input type="submit" value="Save" class="btn btn-info float-right" />
+    </div>
+    </form>
+    </div>
+    <div class="card-footer">
+    <a asp-action="Index" class="btn btn-block btn-dark">Back To List</a>
+    </div>
+    </div>
+    </div>
+    </div>*@
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading text-center">
+                Assigned Role To Users
+            </header>
+        </section>
+    </div>
+    <form asp-action="AssignedRoleToUsers" method="post">
+        <input type="hidden" asp-for="Role.Name" />
+        <div class="col-lg-6">
+            <section class="panel">
+                <table class="table table-striped table-advance table-hover">
+                    <thead>
+                        <tr>
+                            <th><h6 class="card-title">Add user to <span class="label label-info">@Model.Role.Name</span></h6></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.HasNoRole.Count() == 0)
+                        {
+                            <tr>
+                                <td>All users have this role..!</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var user in Model.HasNoRole)
+                            {
+                                <tr>
+                                    <td>@user.UserName</td>
+                                    <td>
+                                        <label class="label_check c_on" for="checkbox-01">
+                                            <input type="checkbox" value="@user.Id" name="UsersToBeAdded">
+                                        </label>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <div class="col-lg-6">
+            <section class="panel">
+                <table class="table table-striped table-advance table-hover">
+                    <thead>
+                        <tr>
+                            <th><h6 class="card-title">Remove user to <span class="label label-info">@Model.Role.Name</span></h6></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.HasRole.Count() == 0)
+                        {
+                            <tr>
+                                <td>There is no user with this role..!</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var user in Model.HasRole)
+                            {
+                                <tr>
+                                    <td>@user.UserName</td>
+                                    <td>
+                                        <label class="label_check c_on" for="checkbox-01">
+                                            <input type="checkbox" value="@user.Id" name="UsersToBeDeleted">
+                                        </label>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <div class="col-lg-12" style="float:left;">
+            <button type="submit" class="btn btn-success">Save</button>
+            <a asp-action="index" asp-controller="Role" class="btn btn-default">Back To List</a>
+        </div>
+    </form>
+</div>

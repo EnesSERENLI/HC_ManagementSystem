@@ -10,7 +10,7 @@ namespace HC.Application.Models.DTO
     public class UpdateRoleDTO
     {
         public string Id { get; set; }
-        public string RoleName { get; set; }
+        public string Name { get; set; }
         public List<AppUser> AppUsers { get; set; }
     }
 }

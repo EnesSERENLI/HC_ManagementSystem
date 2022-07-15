@@ -44,7 +44,7 @@ var mapperConfig = new MapperConfiguration(cfg =>
 
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
-builder.Services.AddIdentity<AppUser,AppUserRole>().AddEntityFrameworkStores<HotCatDbContext>();
+builder.Services.AddIdentity<AppUser, AppUserRole>().AddEntityFrameworkStores<HotCatDbContext>();
 //builder.Services.AddDefaultIdentity<AppUser>().AddEntityFrameworkStores<HotCatDbContext>();
 
 //Identity
@@ -66,7 +66,7 @@ builder.Services.Configure<IdentityOptions>(x =>
 //Cookies
 builder.Services.ConfigureApplicationCookie(x =>
 {
-    x.LoginPath = new PathString("/Home/index");
+    x.LoginPath = new PathString("/Account/SignIn");
     x.AccessDeniedPath = new PathString("/Account/SignIn");
 
     x.Cookie = new CookieBuilder()
@@ -74,7 +74,7 @@ builder.Services.ConfigureApplicationCookie(x =>
         Name = "HotCatCerez"
     };
     x.SlidingExpiration = true;
-    x.ExpireTimeSpan = TimeSpan.FromDays(1);
+    x.ExpireTimeSpan = TimeSpan.FromMinutes(1);
 });
 
 

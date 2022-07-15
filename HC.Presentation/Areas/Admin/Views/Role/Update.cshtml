@@ -1,0 +1,41 @@
+﻿@model UpdateRoleDTO
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-6">
+    <section class="panel">
+        <header class="panel-heading">
+            Update Role
+        </header>
+        <div class="panel-body">
+            <div class="alert-error text-error">
+                @if (TempData["message"] != null)
+                {
+                    <div class="alert alert-error alert-block fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <h4>
+                            <i class="icon-ok-sign"></i>
+                            Error!
+                        </h4>
+                        <span class="text-danger">@TempData["message"]</span>
+                    </div>
+                }
+            </div>
+            <form method="post" role="form" asp-action="Update">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name">RoleName</label>
+                    <input type="text" class="form-control round-input" asp-for="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+
+        </div>
+    </section>
+</div>
+

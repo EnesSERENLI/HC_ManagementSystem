@@ -21,10 +21,10 @@
                 }
                 <ul class="dropdown-menu extended logout">
                     <div class="log-arrow-up"></div>
-                    <li><a asp-action="Profile" asp-controller="Account" asp-route-userName="@User.Identity.Name"><i class=" icon-suitcase"></i>Profile</a></li>
-                    <li><a asp-action="EditProfile" asp-controller="Account" asp-route-userName="@Model.UserName"><i class="icon-cog"></i> Settings</a></li>
+                    <li><a asp-action="Profile" asp-area="" asp-controller="Account" asp-route-userName="@User.Identity.Name"><i class=" icon-suitcase"></i>Profile</a></li>
+                    <li><a asp-action="EditProfile" asp-area="" asp-controller="Account" asp-route-userName="@Model.UserName"><i class="icon-cog"></i> Settings</a></li>
                     <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
-                    <li><a asp-action="LogOut" asp-controller="Account"><i class="icon-key"></i>@User.Identity.Name, Log Out</a></li>
+                    <li><a asp-action="LogOut" asp-area="" asp-controller="Account"><i class="icon-key"></i>@User.Identity.Name, Log Out</a></li>
                 </ul>
             </li>
         </ul>

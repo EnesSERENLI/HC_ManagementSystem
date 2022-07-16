@@ -74,7 +74,7 @@ builder.Services.ConfigureApplicationCookie(x =>
         Name = "HotCatCerez"
     };
     x.SlidingExpiration = true;
-    x.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+    x.ExpireTimeSpan = TimeSpan.FromDays(1);
 });
 
 

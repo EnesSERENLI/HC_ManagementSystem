@@ -27,7 +27,6 @@
 </head>
 
 <body>
-
     <section id="container">
         <!--header start-->
         <header class="header white-bg">
@@ -51,7 +50,6 @@
                             <span>Anasayfa</span>
                         </a>
                     </li>
-                    <!--multi level menu start-->
                     <li class="sub-menu">
                         <a href="javascript:;">
                             <i class="icon-sitemap"></i>
@@ -79,7 +77,6 @@
                             </li>
                         </ul>
                     </li>
-                    <!--multi level menu end-->
                     @if (User.IsInRole("admin"))
                     {
                         <li class="sub-menu">
@@ -95,13 +92,47 @@
                                 <li><a asp-area="admin" asp-controller="department" asp-action="index">Departments</a></li>
                                 <li><a asp-area="admin" asp-controller="order" asp-action="index">Orders</a></li>
                                 <li><a asp-area="admin" asp-controller="orderdetail" asp-action="index">Order Details</a></li>
+                                <li><a asp-area="admin" asp-controller="Role" asp-action="index">Assigned Role</a></li>
                             </ul>
                         </li>
                     }
+                    else if (User.IsInRole("Waiter"))
+                    {
+                        <li>
+                            <a asp-action="index" asp-controller="Home" asp-area="Waiter">
+                                <i class="icon-bolt"></i>
+                                <span>Waiter Page</span>
+                            </a>
+                        </li>
+                    }
+                    else if (User.IsInRole("Purchase"))
+                    {
+                        <li>
+                            <a asp-action="index" asp-controller="Home" asp-area="Purchase">
+                                <i class="icon-bolt"></i>
+                                <span>Purchase Page</span>
+                            </a>
+                        </li>
+                    }
+                    else if (User.IsInRole("Sales"))
+                    {
+                        <li>
+                            <a asp-action="index" asp-controller="Home" asp-area="Sales">
+                                <i class="icon-bolt"></i>
+                                <span>Sales Page</span>
+                            </a>
+                        </li>
+                    }
                     <li>
-                        <a asp-action="SignIn" asp-controller="Account">
-                            <i class="icon-user"></i>
-                            <span>Login Page</span>
+                        <a asp-action="About" asp-controller="Home">
+                            <i class="icon-bookmark-empty"></i>
+                            <span>About Us</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="Contact" asp-controller="Home">
+                            <i class=" icon-phone-sign"></i>
+                            <span>Contact</span>
                         </a>
                     </li>
                 </ul>

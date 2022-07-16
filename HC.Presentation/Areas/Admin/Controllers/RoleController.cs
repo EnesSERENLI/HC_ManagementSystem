@@ -81,9 +81,10 @@ namespace HC.Presentation.Areas.Admin.Controllers
                 TempData["message"] = item.ErrorMessage + "\n";
             }
             return View(model);
-        } 
+        }
         #endregion
 
+        #region AssignedRole
         public async Task<IActionResult> AssignedRoleToUsers(string id)
         {
             AppUserRole role = await _roleManager.FindByIdAsync(id);
@@ -97,7 +98,7 @@ namespace HC.Presentation.Areas.Admin.Controllers
                 if (result)
                     hasRole.Add(user);
                 else
-                hasNoRole.Add(user);
+                    hasNoRole.Add(user);
             }
 
             return View(new AssignedRoleToUsersDTO { Role = role, HasRole = hasRole, HasNoRole = hasNoRole });
@@ -107,7 +108,7 @@ namespace HC.Presentation.Areas.Admin.Controllers
         {
             IdentityResult result;
 
-            
+
             foreach (string userId in model.UsersToBeAdded ?? new string[] { }) //Eğer kullanıcı eklenmezse array boş gelicek bu durumda null ref yememek için new string olarak yeni array açıldı.
             {
                 AppUser user = await _userManager.FindByIdAsync(userId); //Arraydaki id den kullanıcıyı çek
@@ -121,7 +122,8 @@ namespace HC.Presentation.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Index");
-        }
+        } 
+        #endregion
 
     }
 }

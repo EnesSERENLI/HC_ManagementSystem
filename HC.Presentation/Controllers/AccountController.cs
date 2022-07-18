@@ -130,7 +130,7 @@ namespace HC.Presentation.Controllers
         {
             await _appUserService.LogOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("SignIn");
         }
         #endregion
 
@@ -148,9 +148,10 @@ namespace HC.Presentation.Controllers
 
             }
             return RedirectToAction("Index", "Home");
-        } 
+        }
         #endregion
 
+        #region EditProfile
         public async Task<IActionResult> EditProfile(string userName)
         {
             if (User.Identity.Name == userName)
@@ -159,7 +160,7 @@ namespace HC.Presentation.Controllers
 
                 if (user != null)
                 {
-                    var updatedUser =  await _appUserService.GetById(user.Id);
+                    var updatedUser = await _appUserService.GetById(user.Id);
                     return View(updatedUser);
                 }
                 return NotFound();
@@ -176,8 +177,8 @@ namespace HC.Presentation.Controllers
             if (resultValidator.IsValid)
             {
                 TempData["message"] = await _appUserService.UpdateUser(model);
-                var user =await _userManager.FindByIdAsync(model.Id);
-                return RedirectToAction("Profile","Account",new {userName = user.UserName},null);
+                var user = await _userManager.FindByIdAsync(model.Id);
+                return RedirectToAction("Profile", "Account", new { userName = user.UserName }, null);
             }
             else
             {
@@ -187,6 +188,7 @@ namespace HC.Presentation.Controllers
                 }
                 return View(model);
             }
-        }
+        } 
+        #endregion
     }
 }

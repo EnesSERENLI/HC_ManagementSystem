@@ -11,6 +11,7 @@
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="FluentValidation" Version="11.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="SixLabors.ImageSharp" Version="2.1.1" />
 	  <PackageReference Include="SixLabors.ImageSharp.Web" Version="2.0.0" />
   </ItemGroup>

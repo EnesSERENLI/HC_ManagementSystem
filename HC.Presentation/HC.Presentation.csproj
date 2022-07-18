@@ -29,6 +29,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Waiter\Data\" />
     <Folder Include="wwwroot\Content\assets\jquery-file-upload\server\node\public\files\thumbnail\" />
     <Folder Include="wwwroot\Content\assets\jquery-file-upload\server\node\tmp\" />
     <Folder Include="wwwroot\Content\assets\jquery-file-upload\server\php\files\thumbnail\" />

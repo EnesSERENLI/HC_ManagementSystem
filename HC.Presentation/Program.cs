@@ -77,7 +77,11 @@ builder.Services.ConfigureApplicationCookie(x =>
     x.ExpireTimeSpan = TimeSpan.FromDays(1);
 });
 
-
+//Session
+builder.Services.AddSession(x =>
+{
+    
+});
 
 //DependencyResolver
 
@@ -89,7 +93,6 @@ builder.Services.ConfigureApplicationCookie(x =>
 //});
 
 //CreateHostBuilder(args).Build();
-
 
 var app = builder.Build();
 
@@ -109,6 +112,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();

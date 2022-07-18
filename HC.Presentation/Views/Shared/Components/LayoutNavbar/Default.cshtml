@@ -33,15 +33,15 @@
     {
         <ul class="nav nav-tabs pull-right">
             <li style="border-right:solid 1px;">
-                <a asp-action="Index" asp-controller="Home">
+                <a asp-action="Index" asp-controller="Home" asp-area="">
                     <i class="icon-home"></i>
                 </a>
             </li>
             <li style="border-right:solid 1px;">
-                <a asp-action="Register" asp-controller="Account"><i class="icon-user"> </i>Register</a>
+                <a asp-action="Register" asp-controller="Account" asp-area=""><i class="icon-user"> </i>Register</a>
             </li>
             <li>
-                <a asp-action="SignIn" asp-controller="Account"><i class="icon-signin"> </i>Login</a>
+                <a asp-action="SignIn" asp-controller="Account" asp-area=""><i class="icon-signin"> </i>Login</a>
             </li>
         </ul>
     }

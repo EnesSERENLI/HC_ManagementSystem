@@ -18,7 +18,7 @@ namespace HC.Presentation.Areas.Waiter.Controllers
         };
         public IActionResult Index(int id)
         {
-            var cart = SessionHelper.GetProductJson<List<CartItem>>(HttpContext.Session,$"scart{id}");
+            var cart = SessionHelper.GetProductJson<List<CartItem>>(HttpContext.Session, $"scart{id}");
             if (cart != null)
             {
                 return View(cart);
@@ -26,5 +26,49 @@ namespace HC.Presentation.Areas.Waiter.Controllers
             TempData["message"] = "An order for this table has not been opened!";
             return View();
         }
+
+        #region IncreaseOrder Quantity
+        public IActionResult Increase(Guid id, int tableId)
+        {
+            var productList = HttpContext.Session.GetProductJson<List<CartItem>>($"scart{tableId}");
+            CartItem cartItem = productList.Where(x => x.ProductId == id).FirstOrDefault();
+            cartItem.Quantity++;
+
+            SessionHelper.SetProductJson(HttpContext.Session, $"scart{tableId}", productList);
+            return RedirectToAction("index", new { id = tableId });
+        }
+        #endregion
+
+        #region DecreaseOrder Quantity
+        public IActionResult Decrease(Guid id, int tableId)
+        {
+            var productList = HttpContext.Session.GetProductJson<List<CartItem>>($"scart{tableId}");
+            CartItem cartItem = productList.Where(x => x.ProductId == id).FirstOrDefault();
+            if (cartItem.Quantity > 1)
+            {
+                cartItem.Quantity--;
+                HttpContext.Session.SetProductJson($"scart{tableId}", productList);
+            }
+            else if (cartItem.Quantity == 1)
+            {
+                TempData["message"] = "Order quantity must be at least 1!!";
+            }
+            return RedirectToAction("index", new { id = tableId });
+        }
+        #endregion
+
+        public IActionResult DeleteOrder(Guid id, int tableId)
+        {
+            var productList = HttpContext.Session.GetProductJson<List<CartItem>>($"scart{tableId}");
+            CartItem cartItem = productList.Where(x => x.ProductId == id).FirstOrDefault();
+            productList.Remove(cartItem);
+            if (productList.Count > 0)
+                SessionHelper.SetProductJson(HttpContext.Session, $"scart{tableId}", productList);
+            else
+                HttpContext.Session.Remove($"scart{tableId}");
+
+            return RedirectToAction("index", new { id = tableId });
+        }
+
     }
 }

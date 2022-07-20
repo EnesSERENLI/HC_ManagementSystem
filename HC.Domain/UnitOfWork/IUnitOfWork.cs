@@ -16,6 +16,8 @@ namespace HC.Domain.UnitOfWork
         IDepartmentRepository DepartmentRepository { get; }
         IProductRepository ProductRepository { get; }
         IRoleRepository RoleRepository { get; }
+        IOrderRepository OrderRepository { get; }
+        IOrderDetailRepository OrderDetailRepository { get; }
         Task Approve(); //for SaveChanges
 
     }

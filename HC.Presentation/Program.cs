@@ -30,6 +30,8 @@ builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<ISubCategoryService, SubCategoryService>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IOrderDetailService, OrderDetailService>();
 builder.Services.AddTransient<IAppUserService, AppUserService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
 
@@ -44,7 +46,7 @@ var mapperConfig = new MapperConfiguration(cfg =>
 
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
-builder.Services.AddIdentity<AppUser, AppUserRole>().AddEntityFrameworkStores<HotCatDbContext>();
+builder.Services.AddIdentity<AppUser, AppUserRole>().AddEntityFrameworkStores<HotCatDbContext>().AddDefaultTokenProviders();
 //builder.Services.AddDefaultIdentity<AppUser>().AddEntityFrameworkStores<HotCatDbContext>();
 
 //Identity

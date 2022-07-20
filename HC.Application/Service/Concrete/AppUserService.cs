@@ -133,13 +133,13 @@ namespace HC.Application.Service.Concrete
                 if (model.FullName != null && model.FullName != user.FullName)
                 {
                     user.FullName = model.FullName;
-                    _unitOfWork.AppUserRepository.Update(user);
+                    await _unitOfWork.AppUserRepository.Update(user);
                 }
 
                 if (model.Address != null && model.Address != user.Address)
                 {
                     user.Address = model.Address;
-                    _unitOfWork.AppUserRepository.Update(user);
+                    await _unitOfWork.AppUserRepository.Update(user);
                 }
 
                 if (model.Password != null)
@@ -157,7 +157,7 @@ namespace HC.Application.Service.Concrete
                 {
                     await _userManager.SetEmailAsync(user, model.Email);
                 }
-
+                await _unitOfWork.Approve();
                 return "Your profile has been updated!";
             }
 

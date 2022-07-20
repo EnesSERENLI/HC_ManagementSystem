@@ -82,7 +82,17 @@
                 </div>
             </div>
             <div class="text-center invoice-btn">
-                <a class="btn btn-danger btn-lg"><i class="icon-check"></i> Submit Order </a>
+                @if (User.IsInRole("Sales"))
+                {
+                    if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <a asp-area="Waiter" asp-action="ComplateOrder" asp-controller="Cart" asp-route-id="@item.TableId" class="btn btn-danger btn-lg"><i class="icon-check"></i> Submit Order </a>
+                            break;
+                        }
+                    }
+                }
                 <a class="btn btn-info btn-lg" onclick="javascript:window.print();"><i class="icon-print"></i> Print </a>
                 <a asp-area="Waiter" asp-action="index" asp-controller="Home" class="btn btn-warning btn-lg"><i class=" icon-chevron-sign-left"></i> Back </a>
             </div>

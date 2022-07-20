@@ -8,9 +8,10 @@ namespace HC.Application.Models.VM
 {
     public class OrderVM
     {
-        public Guid ProductId { get; set; }
-        public Guid EmployeeId { get; set; }
-        public string UserId { get; set; }
+        //public Guid ProductId { get; set; }
+        public Guid OrderID { get; set; }
+        public string EmployeeName { get; set; }
+        public string UserName { get; set; }
         public string ProductName { get; set; }
         public int Quantity { get; set; }
         public decimal? UnitPrice { get; set; }

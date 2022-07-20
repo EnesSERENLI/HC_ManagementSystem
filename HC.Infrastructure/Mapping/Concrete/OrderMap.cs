@@ -14,7 +14,7 @@ namespace HC.Infrastructure.Mapping.Concrete
         public override void Configure(EntityTypeBuilder<Order> builder)
         {
             builder.HasKey(x => x.ID);
-            builder.Property(x=>x.OrderID).IsRequired(true);
+            //builder.Property(x=>x.OrderID).IsRequired(false);
 
             builder.HasOne(x => x.Employee)
                 .WithMany(x => x.Orders)

@@ -15,7 +15,7 @@ namespace HC.Domain.Entities.Concrete
             Status = Status.Active;
         }
         public Guid ID { get; set; }
-        public int OrderID { get; set; }
+        //public int OrderID { get; set; }
 
         public Status Status { get; set; }
         public DateTime? CreatedDate { get; set; }
@@ -36,7 +36,7 @@ namespace HC.Domain.Entities.Concrete
         public Guid EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
 
-        public Guid AppUserId { get; set; }
+        public string AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
 
         public virtual List<OrderDetail> OrderDetails { get; set; }

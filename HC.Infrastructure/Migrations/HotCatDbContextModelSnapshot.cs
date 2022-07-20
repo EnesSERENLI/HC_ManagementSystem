@@ -378,7 +378,7 @@ namespace HC.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<Guid>("DepertmentId")
+                    b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FirstName")
@@ -416,7 +416,7 @@ namespace HC.Infrastructure.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DepertmentId");
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Employees");
                 });
@@ -427,10 +427,7 @@ namespace HC.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AppUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AppUserId1")
+                    b.Property<string>("AppUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -467,9 +464,6 @@ namespace HC.Infrastructure.Migrations
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("OrderID")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -490,7 +484,7 @@ namespace HC.Infrastructure.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AppUserId1");
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("EmployeeId");
 
@@ -937,7 +931,7 @@ namespace HC.Infrastructure.Migrations
                 {
                     b.HasOne("HC.Domain.Entities.Concrete.Department", "Department")
                         .WithMany("Employees")
-                        .HasForeignKey("DepertmentId")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -948,7 +942,7 @@ namespace HC.Infrastructure.Migrations
                 {
                     b.HasOne("HC.Domain.Entities.Concrete.AppUser", "AppUser")
                         .WithMany("Orders")
-                        .HasForeignKey("AppUserId1")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

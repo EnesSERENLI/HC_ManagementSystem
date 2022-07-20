@@ -8,11 +8,11 @@
         }
         public Guid ProductId { get; set; }
         public Guid EmployeeId { get; set; }
-        public string UserId { get; set; }
+        public string AppUserId { get; set; }
         public int TableId { get; set; }
         public string ProductName { get; set; }
-        public int Quantity { get; set; }
-        public decimal? Price { get; set; }
+        public short Quantity { get; set; }
+        public decimal Price { get; set; }
         public decimal? SubTotal { get => Price * Quantity; }
     }
 }

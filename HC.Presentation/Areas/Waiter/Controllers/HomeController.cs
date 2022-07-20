@@ -64,39 +64,49 @@ namespace HC.Presentation.Areas.Waiter.Controllers
             try
             {
                 var product = await _productService.GetById(id);
-                var user = await _appUserService.GetByUser(userName);
-                List<CartItem> cartItems = HttpContext.Session.GetProductJson<List<CartItem>>($"scart{tableId}");
-
-                Cart c = new Cart();
-                if(cartItems != null)
+                if (product.UnitsInStock > 0)
                 {
-                    foreach (CartItem cartItem in cartItems)
-                    {
-                        c.AddItem(cartItem);
-                    }
-                }
+                    product.UnitsInStock--;
+                    await _productService.Update(product);
+                    var user = await _appUserService.GetByUser(userName);
+                    List<CartItem> cartItems = HttpContext.Session.GetProductJson<List<CartItem>>($"scart{tableId}");
 
-                CartItem ci = new CartItem();
-                ci.ProductId = id;
-                ci.ProductName = product.ProductName;
-                ci.Price = product.UnitPrice;
-                ci.TableId = tableId;
-                ci.UserId = user.Id;
-                foreach (var employee in await _employeeService.GetDefaultEmployees())
+                    Cart c = new Cart();
+                    if (cartItems != null)
+                    {
+                        foreach (CartItem cartItem in cartItems)
+                        {
+                            c.AddItem(cartItem);
+                        }
+                    }
+
+                    CartItem ci = new CartItem();
+                    ci.ProductId = id;
+                    ci.ProductName = product.ProductName;
+                    ci.Price = product.UnitPrice;
+                    ci.TableId = tableId;
+                    ci.AppUserId = user.Id;
+                    foreach (var employee in await _employeeService.GetDefaultEmployees())
+                    {
+                        if (user.FullName == employee.FirstName + " " + employee.LastName)
+                        {
+                            ci.EmployeeId = employee.ID;
+                            break;
+                        }
+                    }
+
+                    c.AddItem(ci);
+                    SessionHelper.SetProductJson(HttpContext.Session, $"scart{tableId}", c.myCart);
+                    Table table = tableList.Find(x => x.Id == tableId);
+                    table.Status = Domain.Enums.Status.None; //masaya sipariş eklediğinde tekrar masanın durumunu None'a çek. Başka siparişlerde verilebilsin.
+
+                    return RedirectToAction("CreateOrder", new { id = tableId });
+                }
+                else
                 {
-                    if (user.FullName == employee.FirstName + " " + employee.LastName)
-                    {
-                        ci.EmployeeId = employee.ID;
-                        break;
-                    }
+                    TempData["message"] = "There are not enough products in stock. You cannot create an order!";
+                    return RedirectToAction("CreateOrder", new { id = tableId });
                 }
-
-                c.AddItem(ci);
-                SessionHelper.SetProductJson(HttpContext.Session,$"scart{tableId}",c.myCart);
-                Table table = tableList.Find(x => x.Id == tableId);
-                table.Status = Domain.Enums.Status.None; //masaya sipariş eklediğinde tekrar masanın durumunu None'a çek. Başka siparişlerde verilebilsin.
-
-                return RedirectToAction("CreateOrder",new {id = tableId });
             }
             catch (Exception ex)
             {

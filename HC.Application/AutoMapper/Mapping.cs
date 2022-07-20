@@ -66,6 +66,7 @@ namespace HC.Application.AutoMapper
             CreateMap<UpdateRoleDTO, IdentityRole>().ReverseMap(); 
             #endregion
 
+            CreateMap<OrderVM,Order>().ReverseMap();
         }
     }
 }

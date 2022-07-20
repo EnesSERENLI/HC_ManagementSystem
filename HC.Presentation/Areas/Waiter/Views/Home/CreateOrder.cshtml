@@ -10,6 +10,21 @@
             <header class="panel-heading">
                 Create Order
             </header>
+            <div class="alert-error text-success">
+                @if (TempData["message"] != null)
+                {
+                    <div class="alert alert-danger alert-block fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <h4>
+                            <i class="icon-ok-sign"></i>
+                            Error!
+                        </h4>
+                        <p>@TempData["message"]</p>
+                    </div>
+                }
+            </div>
             <table class="table table-striped table-advance table-hover">
                 <thead>
                     <tr>

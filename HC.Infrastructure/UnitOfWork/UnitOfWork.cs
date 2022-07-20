@@ -103,6 +103,30 @@ namespace HC.Infrastructure.UnitOfWork
                 return _roleRepository;
             }
         }
+        private IOrderRepository _orderRepository;
+        public IOrderRepository OrderRepository
+        {
+            get
+            {
+                if (_orderRepository == null)
+                {
+                    _orderRepository = new OrderRepository(_db);
+                }
+                return _orderRepository;
+            }
+        }
+        private IOrderDetailRepository _orderDetailRepository;
+        public IOrderDetailRepository OrderDetailRepository
+        {
+            get
+            {
+                if (_orderDetailRepository == null)
+                {
+                    _orderDetailRepository = new OrderDetailRepository(_db);
+                }
+                return _orderDetailRepository;
+            }
+        }
 
         public async Task Approve()
         {

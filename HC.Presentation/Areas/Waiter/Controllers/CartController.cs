@@ -14,7 +14,7 @@ namespace HC.Presentation.Areas.Waiter.Controllers
         private readonly IOrderService _orderService;
         private readonly IOrderDetailService _orderDetailService;
 
-        public CartController(IProductService productService,IOrderService orderService,IOrderDetailService orderDetailService)
+        public CartController(IProductService productService, IOrderService orderService, IOrderDetailService orderDetailService)
         {
             _productService = productService;
             _orderService = orderService;
@@ -103,7 +103,7 @@ namespace HC.Presentation.Areas.Waiter.Controllers
         {
             var products = HttpContext.Session.GetProductJson<List<CartItem>>($"scart{id}");
             CartItem ci = products.Where(x => x.TableId == id).FirstOrDefault();
-            Order order = new Order();            
+            Order order = new Order();
             order.EmployeeId = ci.EmployeeId;
             order.AppUserId = ci.AppUserId;
             await _orderService.Create(order);
@@ -112,7 +112,7 @@ namespace HC.Presentation.Areas.Waiter.Controllers
                 var product = await _productService.GetById(cartItem.ProductId);
                 if (product.UnitsInStock <= 50)
                 {
-                    //todo: Burada stok 50 den aşağı inmiş ise satın alma departmanına uyarı maili atılacak!                
+                    MailSender.SendMail("enes.serenli@hotmail.com", "UnitsInStock", $"The stock quantity of the product named {product.ProductName} is {product.UnitsInStock} pieces. For your information!");
                 }
                 OrderDetail orderDetail = new OrderDetail();
                 orderDetail.ProductId = cartItem.ProductId;
@@ -121,7 +121,7 @@ namespace HC.Presentation.Areas.Waiter.Controllers
                 orderDetail.OrderId = order.ID;
                 await _orderDetailService.Create(orderDetail);
             }
-            
+
             HttpContext.Session.Remove($"scart{id}");
             return RedirectToAction("Index", new { id = id });
         }

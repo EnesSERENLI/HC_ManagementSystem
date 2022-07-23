@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,21 +13,24 @@ namespace HC.Application.Extensions
         public static void SendMail(string email, string subject,string message)
         {
             //Sender
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("Yzl3156yzl@gmail.com", "HotCat Restaurant");
+            var mail = new MailMessage();
+            mail.From = new MailAddress("no-reply@hotcatrestaurant.com","HotCat Restaurant"); //https://mailtrap.io adresine test maili olarak gönderiyorum.
             mail.To.Add(email);
             mail.Subject = subject;
-            mail.Body = message;
             mail.IsBodyHtml = true;
-
+            mail.Body = message;
             //Smtp
-            SmtpClient smtp = new SmtpClient();
-            smtp.Credentials = new NetworkCredential("Yzl3156yzl@gmail.com", "enter ur password");
-            smtp.Port = 587;
-            smtp.Host = "smtp.gmail.com";
-            smtp.EnableSsl = true;
-
-            smtp.Send(mail);
+            try
+            {
+                SmtpClient smtp = new SmtpClient("smtp.mailtrap.io", 587);
+                smtp.Credentials = new NetworkCredential("d502980aa76f2c", "62b9c27dd34b83");
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

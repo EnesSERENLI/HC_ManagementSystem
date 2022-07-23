@@ -38,8 +38,7 @@ namespace HC.Presentation.Controllers
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByEmailAsync(model.Email); //kullaniciyi email üzerinde kontrol et.
-                    //MailSender.SendMail(user.Email, "<h2 style='color:green;'>Hotcat Activation</h2> <hr />", " Please click the link below to activate your subscription <br />https://localhost:7149/Account/Activation/" + user.Id);
-                    //Mail atma olayında sıkıntı var güvenlik onaylarından dolayı şimdilik pending sayfasından onaylatma işlemini yaptırıyorum.
+                    MailSender.SendMail(user.Email, "Hotcat Activation", $"<h2>Welcome {user.UserName}!!</h2> <hr /> Please click the link below to activate your subscription <br /> https://localhost:7149/Account/Activation/" + user.Id);
                     return RedirectToAction("Pending", user);
                 }
                 foreach (var item in result.Errors)

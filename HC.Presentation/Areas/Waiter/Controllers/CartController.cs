@@ -3,11 +3,13 @@ using HC.Application.Service.Interface;
 using HC.Domain.Entities.Concrete;
 using HC.Presentation.Areas.Waiter.Models;
 using HC.Presentation.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HC.Presentation.Areas.Waiter.Controllers
 {
     [Area("Waiter")]
+    [Authorize(Roles ="Waiter,Sales")]
     public class CartController : Controller
     {
         private readonly IProductService _productService;
@@ -36,7 +38,6 @@ namespace HC.Presentation.Areas.Waiter.Controllers
             {
                 return View(cart);
             }
-            TempData["message"] = "An order for this table has not been opened!";
             return View();
         }
 
@@ -99,6 +100,7 @@ namespace HC.Presentation.Areas.Waiter.Controllers
         }
         #endregion
 
+        #region ComplateOrder
         public async Task<IActionResult> ComplateOrder(int id)
         {
             var products = HttpContext.Session.GetProductJson<List<CartItem>>($"scart{id}");
@@ -124,7 +126,8 @@ namespace HC.Presentation.Areas.Waiter.Controllers
 
             HttpContext.Session.Remove($"scart{id}");
             return RedirectToAction("Index", new { id = id });
-        }
+        } 
+        #endregion
 
     }
 }

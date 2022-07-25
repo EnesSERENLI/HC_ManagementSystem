@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItem", "SolutionItem", "{C44671B9-CD53-4C35-A9F0-B9B2E631B8EF}"
+	ProjectSection(SolutionItems) = preProject
+		..\BitirmeProjeleri-main\HotCat --.doc = ..\BitirmeProjeleri-main\HotCat --.doc
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Domain", "HC.Domain\HC.Domain.csproj", "{EB3C9064-3A75-4623-8FD8-AB51BF8177FD}"
 EndProject
@@ -11,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Infrastructure", "HC.Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Presentation", "HC.Presentation\HC.Presentation.csproj", "{582405E8-87BC-45A4-A8DC-342D6A831625}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HC.Application", "HC.Application\HC.Application.csproj", "{D6386052-BBFB-4C0F-9327-3B1AE3639C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Application", "HC.Application\HC.Application.csproj", "{D6386052-BBFB-4C0F-9327-3B1AE3639C16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

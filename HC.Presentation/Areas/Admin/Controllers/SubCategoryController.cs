@@ -2,11 +2,13 @@
 using HC.Application.Models.DTO;
 using HC.Application.Service.Interface;
 using HC.Application.Validation.FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HC.Presentation.Areas.Admin.Controllers
 {
     [Area("admin")]
+    [Authorize(Roles = "Admin")]
     public class SubCategoryController : Controller
     {
         private readonly ISubCategoryService _subCategoryService;

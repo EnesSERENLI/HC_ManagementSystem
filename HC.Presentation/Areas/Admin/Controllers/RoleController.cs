@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HC.Presentation.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles ="Admin")]
     public class RoleController : Controller
     {
         private readonly IRoleService _roleService;

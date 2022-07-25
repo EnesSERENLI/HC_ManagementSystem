@@ -1,12 +1,14 @@
 ﻿using HC.Application.Models.DTO;
 using HC.Application.Service.Interface;
 using HC.Application.Validation.FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FluentValidation.Results;
 
 namespace HC.Presentation.Areas.Admin.Controllers
 {
     [Area("admin")]
+    [Authorize(Roles ="Admin")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;

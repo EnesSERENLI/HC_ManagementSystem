@@ -2,11 +2,13 @@
 using HC.Application.Service.Interface;
 using HC.Presentation.Areas.Waiter.Models;
 using HC.Presentation.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HC.Presentation.Areas.Waiter.Controllers
 {
     [Area("Waiter")]
+    [Authorize(Roles ="Waiter,Sales")]
     public class HomeController : Controller
     {
         private readonly IProductService _productService;
@@ -59,7 +61,8 @@ namespace HC.Presentation.Areas.Waiter.Controllers
             return View(table);
         }
 
-        public async Task<IActionResult> AddToCart(Guid id,int tableId,string userName)
+        #region AddToCart
+        public async Task<IActionResult> AddToCart(Guid id, int tableId, string userName)
         {
             try
             {
@@ -113,6 +116,7 @@ namespace HC.Presentation.Areas.Waiter.Controllers
                 TempData["message"] = ex.Message;
                 return RedirectToAction("CreateOrder");
             }
-        }
+        } 
+        #endregion
     }
 }

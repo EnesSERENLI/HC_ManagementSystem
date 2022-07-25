@@ -16,13 +16,13 @@ namespace HC.Application.Service.Concrete
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public OrderService(IUnitOfWork unitOfWork,IMapper mapper)
+        public OrderService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        
+
 
         public async Task<string> Create(Order model)
         {
@@ -40,9 +40,12 @@ namespace HC.Application.Service.Concrete
             }
         }
 
-        public Task<OrderVM> GetById(Guid id)
+        public async Task<OrderVM> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await _unitOfWork.OrderRepository.GetById(id);
+
+            var order = _mapper.Map<OrderVM>(result);
+            return order;
         }
 
         public async Task<List<OrderVM>> GetOrders()

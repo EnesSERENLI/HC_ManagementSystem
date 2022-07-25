@@ -1,0 +1,59 @@
+﻿@model UpdateProductDTO
+@{
+    ViewData["Title"] = "BuyProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-6">
+    <section class="panel">
+        <header class="panel-heading">
+            Buy Product
+        </header>
+        <div class="panel-body">
+            <div class="alert-error text-error">
+                @if (TempData["message"] != null)
+                {
+                    <div class="alert alert-error alert-block fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <h4>
+                            <i class="icon-ok-sign"></i>
+                            Error!
+                        </h4>
+                        <p>@TempData["message"]</p>
+                    </div>
+                }
+            </div>
+            <form method="post" role="form" enctype="multipart/form-data" asp-action="BuyProduct">
+                <div class="form-group">
+                    <label asp-for="ProductName"></label>
+                    <input type="text" class="form-control round-input" asp-for="ProductName" readonly="readonly" />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UnitsInStock"></label>
+                    <input type="number" class="form-control round-input" asp-for="UnitsInStock" />
+                    <span asp-validation-for="UnitsInStock" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="UnitPrice"/>
+                    <input type="hidden" asp-for="Description"/>
+                    <input type="hidden" asp-for="SubCategoryId"/>
+                    <input type="hidden" asp-for="CreatedIP" />
+                    <input type="hidden" asp-for="CreatedComputerName" />
+                    <input type="hidden" asp-for="CreatedDate" />
+                    <input type="hidden" asp-for="UpdatedIP" />
+                    <input type="hidden" asp-for="UpdatedComputerName" />
+                    <input type="hidden" asp-for="UpdatedDate" />
+                    <input type="hidden" asp-for="DeletedIP" />
+                    <input type="hidden" asp-for="DeletedComputerName" />
+                    <input type="hidden" asp-for="DeletedDate" />
+                </div>
+                <button type="submit" class="btn btn-info">Buy</button>
+            </form>
+
+        </div>
+    </section>
+</div>
+

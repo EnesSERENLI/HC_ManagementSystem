@@ -2,11 +2,13 @@
 using HC.Application.Models.DTO;
 using HC.Application.Service.Interface;
 using HC.Application.Validation.FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HC.Presentation.Areas.Admin.Controllers
 {
     [Area("admin")]
+    [Authorize(Roles ="Admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -72,13 +74,15 @@ namespace HC.Presentation.Areas.Admin.Controllers
                 TempData["message"] = "Error message: " + item.ErrorMessage + "\n";
             }
             return View(model);
-        } 
+        }
         #endregion
 
+        #region DeleteCategory
         public async Task<IActionResult> DeleteCategory(Guid id)
         {
             TempData["message"] = await _categoryService.Delete(id);
             return RedirectToAction("index");
-        }
+        } 
+        #endregion
     }
 }

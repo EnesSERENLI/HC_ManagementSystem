@@ -88,6 +88,7 @@ namespace HC.Application.Service.Concrete
             {
                 ID = x.ID,
                 SubCategoryName = x.SubCategoryName,
+                CategoryName = x.Category.CategoryName,
                 Description = x.Description,
                 Status = x.Status               
             },

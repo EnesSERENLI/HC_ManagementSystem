@@ -49,10 +49,10 @@
                             {
                                 <td style="width:50px;"><img src="~/Content/img/product2.png" style="width:100px; height:100px;" alt="Alternate Text" /></td>
                             }
-                            <td>@Html.ActionLink(product.ProductName, "Details", new { id = product.ID })</td>
+                            <td><a asp-action="Details" asp-controller="Home" asp-area="" asp-route-id="@product.ID">@product.ProductName</a></td>
                             <td class="hidden-phone">@product.Description</td>
                             <td class="hidden-phone">@product.SubCategoryName</td>
-                            <td class="hidden-phone">@product.UnitPrice.ToString("C2")</td>
+                            <td class="hidden-phone">@product.UnitPrice <i class="icon-usd"></i></td>
                             <td class="hidden-phone">@product.UnitsInStock</td>
                             <td>
                                 @if (product.Status == HC.Domain.Enums.Status.Active)

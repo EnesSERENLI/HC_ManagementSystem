@@ -19,7 +19,7 @@ namespace HC.Application.Service.Interface
         //List
         Task<List<ProductVM>> GetProducts();
         Task<List<ProductVM>> GetDefaultProducts();
-        Task<List<ProductVM>> GetProductsByCategory(Guid subCategoryId);
+        Task<List<ProductVM>> GetProductsByCategory(Guid? subCategoryId);
         //Find
         Task<UpdateProductDTO> GetById(Guid id);
     }

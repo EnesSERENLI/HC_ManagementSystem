@@ -12,7 +12,7 @@ namespace HC.Application.Models.VM
         public Guid? ID { get; set; }
         public string SubCategoryName { get; set; }
         public string Description { get; set; }
-
+        public string CategoryName { get; set; }
         public Status Status { get; set; }
     }
 }

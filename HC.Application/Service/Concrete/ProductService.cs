@@ -125,7 +125,7 @@ namespace HC.Application.Service.Concrete
             return productList;
         }
 
-        public async Task<List<ProductVM>> GetProductsByCategory(Guid subCategoryId)
+        public async Task<List<ProductVM>> GetProductsByCategory(Guid? subCategoryId)
         {
             var productList = await _unitOfWork.ProductRepository.GetFilteredFirstOrDefaults(x => new ProductVM
             {

@@ -18,8 +18,13 @@ namespace HC.Presentation.Controllers
             _subCategoryService = subCategoryService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid? id)
         {
+            ViewBag.SubCategories = await _subCategoryService.GetDefaultSubCategories();
+            if (id != null)
+            {
+                return View(await _productService.GetProductsByCategory(id));
+            }
             return View(await _productService.GetDefaultProducts());
         }
         public async Task<IActionResult> Details(Guid id)

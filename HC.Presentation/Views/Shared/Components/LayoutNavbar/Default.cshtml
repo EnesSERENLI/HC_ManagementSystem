@@ -8,7 +8,7 @@
                 @if (Model.ImagePath == null)
                 {
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <img alt="" src="~/Content/img/avatar1_small.jpg">
+                        <img alt="" src="~/Content/images/users/emptyprofileavatar.png" style="width:40px;height:40px;">
                         <span class="username">@Model.UserName</span>
                     </a>
                 }
@@ -33,7 +33,7 @@
     {
         <ul class="nav nav-tabs pull-right">
             <li style="border-right:solid 1px;">
-                <a asp-action="Index" asp-controller="Home" asp-area="">
+                <a asp-action="Index" asp-controller="Home" asp-area="" asp-route-id="">
                     <i class="icon-home"></i>
                 </a>
             </li>

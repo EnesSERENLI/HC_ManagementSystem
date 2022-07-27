@@ -32,9 +32,6 @@
     <Folder Include="Areas\Purchase\Data\" />
     <Folder Include="Areas\Purchase\Models\" />
     <Folder Include="Areas\Waiter\Data\" />
-    <Folder Include="wwwroot\Content\assets\jquery-file-upload\server\node\public\files\thumbnail\" />
-    <Folder Include="wwwroot\Content\assets\jquery-file-upload\server\node\tmp\" />
-    <Folder Include="wwwroot\Content\assets\jquery-file-upload\server\php\files\thumbnail\" />
     <Folder Include="wwwroot\Content\images\products\" />
   </ItemGroup>
 

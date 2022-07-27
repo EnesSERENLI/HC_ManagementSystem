@@ -15,13 +15,13 @@
                     <span>Categories</span>
                 </a>
                 <ul class="sub">
-                    <li><a asp-action="index" asp-controller="Home" asp-route-id="">All Menus</a></li>
+                    <li><a asp-action="index" asp-controller="Home" asp-area="" asp-route-id="">All Menus</a></li>
                     @foreach (var item in Model)
                     {
                         <li class="sub-menu">
                             <a href="boxed_page.html">@item.CategoryName</a>
                             <ul class="sub">
-                                <li><a asp-action="index" asp-controller="home" asp-route-id="@item.ID">@item.SubCategoryName</a></li>
+                                <li><a asp-action="index" asp-controller="home" asp-area="" asp-route-id="@item.ID">@item.SubCategoryName</a></li>
                             </ul>
                         </li>
                     }
@@ -41,12 +41,11 @@
                         <li><a asp-area="admin" asp-controller="Employee" asp-action="index">Employees</a></li>
                         <li><a asp-area="admin" asp-controller="department" asp-action="index">Departments</a></li>
                         <li><a asp-area="admin" asp-controller="order" asp-action="index">Orders</a></li>
-                        <li><a asp-area="admin" asp-controller="orderdetail" asp-action="index">Order Details</a></li>
                         <li><a asp-area="admin" asp-controller="Role" asp-action="index">Assigned Role</a></li>
                     </ul>
                 </li>
             }
-            else if (User.IsInRole("Waiter"))
+            else if (User.IsInRole("Waiter") || User.IsInRole("Sales"))
             {
                 <li>
                     <a asp-action="index" asp-controller="Home" asp-area="Waiter">
@@ -61,15 +60,6 @@
                     <a asp-action="index" asp-controller="Home" asp-area="Purchase">
                         <i class="icon-bolt"></i>
                         <span>Purchase Page</span>
-                    </a>
-                </li>
-            }
-            else if (User.IsInRole("Sales"))
-            {
-                <li>
-                    <a asp-action="index" asp-controller="Home" asp-area="Sales">
-                        <i class="icon-bolt"></i>
-                        <span>Sales Page</span>
                     </a>
                 </li>
             }

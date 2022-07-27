@@ -40,7 +40,7 @@
                     @foreach (var employee in Model)
                     {
                         <tr>
-                            <td>@Html.ActionLink(employee.FirstName+" "+employee.LastName, "Details", new { id = employee.ID })</td>
+                            <td class="hidden-phone">@employee.FirstName @employee.LastName</td>
                             <td class="hidden-phone">@employee.Title</td>
                             <td class="hidden-phone">@employee.Department</td>
                             <td class="hidden-phone">@employee.Address</td>

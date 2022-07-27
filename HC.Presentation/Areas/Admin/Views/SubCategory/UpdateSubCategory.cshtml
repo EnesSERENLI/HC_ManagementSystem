@@ -41,7 +41,14 @@
                     <select class="form-control round-input input-medium m-bot15" name="CategoryId">
                         @foreach (var category in ViewBag.Categories)
                         {
-                            <option value="@category.ID">@category.CategoryName</option>
+                            if (category.CategoryName == Model.CategoryName)
+                            {
+                                <option value="@category.ID" selected>@category.CategoryName</option>
+                            }
+                            else
+                            {
+                                <option value="@category.ID">@category.CategoryName</option>
+                            }                            
                         }
                     </select>
                 </div>

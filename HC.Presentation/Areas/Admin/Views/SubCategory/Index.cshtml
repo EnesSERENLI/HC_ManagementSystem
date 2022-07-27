@@ -38,7 +38,7 @@
                     @foreach (var subCategory in Model)
                     {
                         <tr>
-                            <td>@Html.ActionLink(subCategory.SubCategoryName, "Details", new { id = subCategory.ID })</td>
+                            <td class="hidden-phone">@subCategory.SubCategoryName</td>
                             <td class="hidden-phone">@subCategory.Description</td>
                             <td>
                                 @if (subCategory.Status == HC.Domain.Enums.Status.Active)

@@ -51,7 +51,14 @@
                     <select class="form-control round-input input-medium m-bot15" name="DepartmentId">
                         @foreach (var department in ViewBag.Departments)
                         {
-                            <option value="@department.ID">@department.DepartmentName</option>
+                            if (department.DepartmentName == Model.DepartmentName)
+                            {
+                                <option value="@department.ID" selected>@department.DepartmentName</option>
+                            }
+                            else
+                            {
+                                <option value="@department.ID">@department.DepartmentName</option>
+                            }                            
                         }
                     </select>
                 </div>

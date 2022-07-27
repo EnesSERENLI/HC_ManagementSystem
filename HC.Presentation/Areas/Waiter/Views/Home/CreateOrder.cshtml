@@ -30,8 +30,8 @@
                     <tr>
                         <th><i class="icon-bullhorn"></i>ProductName</th>
                         <th class="hidden-phone"><i class="icon-question-sign"></i>UnitPrice</th>
-                        <th><i class=" icon-edit"></i> UnitsInStock</th>
-                        <th><i class=" icon-edit"></i> AddToCart</th>
+                        <th><i class="icon-edit"></i> UnitsInStock</th>
+                        <th><i class="icon-shopping-cart"></i> AddToCart</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -40,27 +40,10 @@
                     {
                         <tr>
                             <td>@product.ProductName</td>
-                            <td>@product.UnitPrice</td>
+                            <td>@product.UnitPrice <i class="icon-usd"></i></td>
                             <td>@product.UnitsInStock</td>
                             <td>
-                                <div id="spinner4">
-                                    <div class="input-group" style="width:150px;">
-                                        <div class="spinner-buttons input-group-btn">
-                                            <a class="btn spinner-up btn-warning" asp-action="Increase" asp-controller="Home">
-                                                <i class="icon-plus"></i>
-                                            </a>
-                                        </div>
-                                        <input type="number" class="spinner-input form-control" value="1" readonly="readonly">
-                                        <div class="spinner-buttons input-group-btn">
-                                            <a class="btn spinner-down btn-danger" asp-action="Decrease" asp-controller="Home">
-                                                <i class="icon-minus"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a asp-area="Waiter" asp-controller="Home" asp-action="AddToCart" asp-route-id="@product.ID" asp-route-tableId="@Model.Id" asp-route-userName="@User.Identity.Name" class="btn btn-default"><i class="icon-shopping-cart"></i>AddToCart</a>
+                                <a asp-area="Waiter" asp-controller="Home" asp-action="AddToCart" asp-route-id="@product.ID" asp-route-tableId="@Model.Id" asp-route-userName="@User.Identity.Name" class="btn btn-success"><i class="icon-shopping-cart"></i>AddToCart</a>
                             </td>
                         </tr>
                     }

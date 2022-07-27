@@ -30,11 +30,19 @@ namespace HC.Presentation.Areas.Purchase.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BuyProduct(UpdateProductDTO model)
+        public async Task<IActionResult> BuyProduct(UpdateProductDTO model,short quantity)
         {
             if (model != null)
             {
-                TempData["message"] = await _productService.Update(model);
+                if (quantity > 0)
+                {
+                    model.UnitsInStock += quantity;
+                    TempData["message"] = await _productService.Update(model);
+                }
+                else
+                {
+                    TempData["message"] = "Purchase quantity must be greater than 1!";
+                }
                 return RedirectToAction("Index");
             }
             TempData["message"] = "No such product found!";

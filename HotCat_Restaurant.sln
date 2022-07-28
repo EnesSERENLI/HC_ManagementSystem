@@ -16,6 +16,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Presentation", "HC.Prese
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Application", "HC.Application\HC.Application.csproj", "{D6386052-BBFB-4C0F-9327-3B1AE3639C16}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{0DED469E-37E3-4D1D-836E-FF122F5D8BF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HC.API", "HC.API\HC.API.csproj", "{8EF3530B-41CF-4588-98FA-481A51D17E3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,9 +42,16 @@ Global
 		{D6386052-BBFB-4C0F-9327-3B1AE3639C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6386052-BBFB-4C0F-9327-3B1AE3639C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6386052-BBFB-4C0F-9327-3B1AE3639C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EF3530B-41CF-4588-98FA-481A51D17E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EF3530B-41CF-4588-98FA-481A51D17E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EF3530B-41CF-4588-98FA-481A51D17E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EF3530B-41CF-4588-98FA-481A51D17E3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8EF3530B-41CF-4588-98FA-481A51D17E3D} = {0DED469E-37E3-4D1D-836E-FF122F5D8BF7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {906A4401-F73C-4FF7-BB70-0CBE84BFF6B2}

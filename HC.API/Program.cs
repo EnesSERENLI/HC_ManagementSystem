@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using HC.Application.AutoMapper;
 using HC.Application.Service.Concrete;
 using HC.Application.Service.Interface;
@@ -18,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<HotCatDbContext>(options =>
@@ -46,7 +47,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("HCAPI", new OpenApiInfo()
     {
         Title = "RESTful API",
-        Version = "v1",
+        Version = "V1",
         Description = "Restful Api Trials",
         Contact = new OpenApiContact()
         {
@@ -73,7 +74,7 @@ if (app.Environment.IsDevelopment())
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
-    options.SwaggerEndpoint("/swagger/HCAPI/swagger.json", "HCAPI");
+    options.SwaggerEndpoint("/swagger/HCAPI/swagger.json", "HC API");
 });
 
 app.UseRouting();

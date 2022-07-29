@@ -100,6 +100,7 @@ namespace HC.Application.Service.Concrete
                 UnitsInStock = x.UnitsInStock,
                 ImagePath = x.ImagePath,
                 Status = x.Status,
+                SubCategoryId= x.SubCategoryId,
                 SubCategoryName = x.SubCategory.SubCategoryName
             },
             expression: x=>x.Status != Domain.Enums.Status.Deleted);

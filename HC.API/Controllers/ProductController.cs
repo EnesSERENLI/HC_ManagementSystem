@@ -29,7 +29,7 @@ namespace HC.API.Controllers
         public async Task<IActionResult> GetProductById(Guid id)
         {
             var product = await _productService.GetById(id);
-            if(product == null)
+            if (product == null)
                 return NotFound();
             else
                 return Ok(product);
@@ -41,18 +41,11 @@ namespace HC.API.Controllers
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AddProduct([FromForm] CreateProductDTO model)
-        {            
+        {
             CreateProductDTOValidation validator = new CreateProductDTOValidation();
-            try
-            {
-                validator.ValidateAndThrow(model);
-                var result = await _productService.Create(model);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }            
+            validator.ValidateAndThrow(model);
+            var result = await _productService.Create(model);
+            return Ok(result);
         }
         /// <summary>
         /// Update Product
@@ -62,17 +55,10 @@ namespace HC.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateProduct([FromForm] UpdateProductDTO model)
         {
-            try
-            {
-                UpdateProductDTOValidation validator = new UpdateProductDTOValidation();
-                validator.ValidateAndThrow(model);
-                var result = await _productService.Update(model);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            UpdateProductDTOValidation validator = new UpdateProductDTOValidation();
+            validator.ValidateAndThrow(model);
+            var result = await _productService.Update(model);
+            return Ok(result);
         }
 
         /// <summary>
@@ -93,7 +79,7 @@ namespace HC.API.Controllers
                 string result = await _productService.Delete(id);
                 return Ok(result);
             }
-              
+
         }
     }
 }

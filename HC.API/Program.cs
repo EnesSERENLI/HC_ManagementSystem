@@ -1,5 +1,8 @@
 using AutoMapper;
 using FluentValidation.AspNetCore;
+using HC.API.MiddleWares;
+using HC.API.Utils.Concrete;
+using HC.API.Utils.Interface;
 using HC.Application.AutoMapper;
 using HC.Application.Service.Concrete;
 using HC.Application.Service.Interface;
@@ -29,6 +32,7 @@ builder.Services.AddDbContext<HotCatDbContext>(options =>
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddSingleton<ILoggerService, FileLogger>(); //Eðer console'a yazdýrmak istersem tek yapmam gereken FileLogger yerine ConsoleLogger yazmak..
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 //AutoMapper
@@ -83,6 +87,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCustomExceptionMiddle();
 
 app.UseEndpoints(endPoints =>
 {

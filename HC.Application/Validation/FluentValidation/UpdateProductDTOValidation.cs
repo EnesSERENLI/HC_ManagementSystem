@@ -18,7 +18,7 @@ namespace HC.Application.Validation.FluentValidation
             RuleFor(x => x.UnitsInStock).NotEmpty().WithMessage("UnitsInStock cannot be empty");
             RuleFor(x => x.SubCategoryId).NotEmpty().WithMessage("SubCategoryId cannot be empty");
             RuleFor(x => x.ImagePath).MinimumLength(3).MaximumLength(500).WithMessage("Character min :3 , max : 500");
-            RuleFor(x => x.Image).NotEmpty();
+            //RuleFor(x => x.Image).NotEmpty();
         }
     }
 }

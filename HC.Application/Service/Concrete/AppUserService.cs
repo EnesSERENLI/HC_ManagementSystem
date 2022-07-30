@@ -151,6 +151,7 @@ namespace HC.Application.Service.Concrete
                 if (model.UserName != null && model.UserName != user.UserName)
                 {
                     await _userManager.SetUserNameAsync(user, model.UserName);
+                    await _unitOfWork.AppUserRepository.Update(user);
                 }
 
                 if (model.Email != null && model.Email != user.Email)

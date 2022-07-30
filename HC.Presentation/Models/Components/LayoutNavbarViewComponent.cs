@@ -13,6 +13,10 @@ namespace HC.Presentation.Models.Components
             if (userName != null)
             {
                 var user = await _appUserService.GetByUser(userName);
+                if (user == null)
+                {
+                    return View(new AppUserVM());
+                }
                 return View(user);
             }
             return View(new AppUserVM());

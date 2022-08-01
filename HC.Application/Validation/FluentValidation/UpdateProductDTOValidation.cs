@@ -17,8 +17,20 @@ namespace HC.Application.Validation.FluentValidation
             RuleFor(x => x.UnitPrice).NotEmpty().WithMessage("UnitPrice cannot be empty");
             RuleFor(x => x.UnitsInStock).NotEmpty().WithMessage("UnitsInStock cannot be empty");
             RuleFor(x => x.SubCategoryId).NotEmpty().WithMessage("SubCategoryId cannot be empty");
-            RuleFor(x => x.ImagePath).MinimumLength(3).MaximumLength(500).WithMessage("Character min :3 , max : 500");
+            RuleFor(x => x.ImagePath).MinimumLength(3).MaximumLength(500).WithMessage("Character min :3 , max : 500").When(x=>x.ImagePath != String.Empty);
             //RuleFor(x => x.Image).NotEmpty();
+            RuleFor(x => x.CreatedIP).MinimumLength(2).When(x=>x.CreatedIP != String.Empty);
+            RuleFor(x => x.CreatedDate).Empty();
+            RuleFor(x => x.CreatedComputerName).MinimumLength(2).When(x=>x.CreatedIP != String.Empty);
+            RuleFor(x => x.CreatorUserName).MinimumLength(2).When(x=>x.CreatedIP != String.Empty);
+            RuleFor(x => x.UpdatedIP).MinimumLength(2).When(x=>x.CreatedIP != String.Empty);
+            RuleFor(x => x.UpdatedDate).Empty();
+            RuleFor(x => x.UpdatedComputerName).MinimumLength(2).When(x=>x.CreatedIP != String.Empty);
+            RuleFor(x => x.UpdaterUserName).MinimumLength(2).When(x=>x.CreatedIP != String.Empty);
+            RuleFor(x => x.DeletedIP).MinimumLength(2).When(x=>x.CreatedIP != String.Empty);
+            RuleFor(x => x.DeletedComputerName).MinimumLength(2).When(x=>x.CreatedIP != String.Empty);
+            RuleFor(x => x.DeleterUserName).MinimumLength(2).When(x=>x.CreatedIP != String.Empty);
+            RuleFor(x => x.DeletedDate).Empty();
         }
     }
 }

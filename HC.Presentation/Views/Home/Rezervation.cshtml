@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Rezervation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="panel">
+    <header class="panel-heading">
+        Rezervation
+    </header>
+    <div class="panel-body">
+        <form role="form">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Name">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="SurName">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="date" class="form-control" placeholder="Date" required>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="time" class="form-control" placeholder="Hour" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="tel" class="form-control" placeholder="PhoneNumber" required>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Enter email" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <input type="number" class="form-control" placeholder="Number of people" required/>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info" style="margin-top:20px;">Create reservation</button>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,38 @@
+Hıdır Dır, Restourant Müdürü
+
+Stok bilgisini tutarken yaşadığımız en büyük sıkıntı, yapının yavaş olması, rapor bakımından çok yetersiz olması ve en önemlisi rahat yönetilememesi. 
+Bizim için önemli olan noktalardan bir taneside, ürünlerimizin sürekli olarak stokta mevcut olması. 
+Müşteriye yok demek bizim için bir utanç kaynağıdır.
+
+Bu durumda sizden taleplerim;
+	
+1.	Sınırsız Kategori, Ürün ve Alt Ürün eklenebilmeli
+2.	Kesinlikle Kategori, Ürün ve Alt Ürün silinmemeli (geriye dönük raporlamalar için)
+3.	Her ürün için minimum stok adedi belirlenmeli (satış için), sınıra ulaşan ürün olduğunda tanımlanan kişi yada departmana uyarı gönderebilmeli
+4.	Barkod okuyucu kullanılacağı göz önüne alınmalıdır.
+5.	Geniş Raporlama seçenekleri sunulmalı.
+
+
+Şahabettin Kesmeşeker, Garson
+
+Müşteriden sipariş alırken en çok zorlandığımız 2 şey var. 
+Bunlardan birincisi kağıt ve kalem kullandığımız için değişiklikler üzerini çizme ve yeniden yazmayla mümkün olması ve siparişini alacağımız ürünün elimizde ne kadar olduğunu o an bilemememiz. 
+
+Tüm garson arkadaşlar adına sizden istediklerimiz;
+
+1.	Siparişi daha pratik bir yolla müşteriden alabilmeliyiz
+2.	Aynı anda 2 garson aynı masaya sipariş girememeli
+3.	Siparişini vereceğimiz ürünün mevcut olup olmadığını bilmeliyiz
+
+
+Nil Martıbacak, Kasiyer
+
+Hesap kesiminde yaşadığımız en büyük sıkıntı, hesabın küçük küçük kağıtlarda tutulması. 
+Buna karşılık birde yazarkasa kullandığımızdan işlemin uzaması. 
+İstediğimiz tüm işlemlerim tek yerden yapılabilmesi. 
+
+Bu durumda sizden istediklerim;
+
+1.	Tüm sok bilgisini görülebilmeli
+2.	Hesap kesimi yapıp fiş çıkarabilmeli
+3.	İlgili departmandan Ürün talebi yapabilmeli

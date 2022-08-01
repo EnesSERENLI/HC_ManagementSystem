@@ -17,7 +17,7 @@ namespace HC.Application.Validation.FluentValidation
             RuleFor(x => x.UnitPrice).NotEmpty().WithMessage("UnitPrice cannot be empty").GreaterThan(0).WithMessage("UnitPrice must be greater than 0");
             RuleFor(x => x.UnitsInStock).NotEmpty().WithMessage("UnitsInStock cannot be empty").GreaterThan(Convert.ToInt16(0)).WithMessage("UnitsInStock must be greater than 0");
             RuleFor(x => x.SubCategoryId).NotEmpty().WithMessage("SubCategoryId cannot be empty");
-            RuleFor(x => x.ImagePath).MinimumLength(3).MaximumLength(500).WithMessage("Character min :3 , max : 500");
+            RuleFor(x => x.ImagePath).MinimumLength(3).MaximumLength(500).WithMessage("Character min :3 , max : 500").When(x=>x.ImagePath != String.Empty);
             RuleFor(x => x.Image).NotEmpty();
         }
     }

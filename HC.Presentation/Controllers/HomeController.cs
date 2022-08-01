@@ -32,5 +32,15 @@ namespace HC.Presentation.Controllers
             ViewBag.SubCategories = await _subCategoryService.GetDefaultSubCategories();
             return View(await _productService.GetById(id));
         }
+
+        public IActionResult Rezervation()
+        {
+            return View();
+        }
+
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
     }
 }

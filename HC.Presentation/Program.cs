@@ -1,15 +1,19 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using HC.Application.AutoMapper;
+using HC.Application.Extensions;
 using HC.Application.InversionOfControl;
 using HC.Application.Service.Concrete;
 using HC.Application.Service.Interface;
 using HC.Domain.Entities.Concrete;
 using HC.Domain.UnitOfWork;
 using HC.Infrastructure.Context;
+using HC.Infrastructure.DependencyResolver;
 using HC.Infrastructure.UnitOfWork;
+using HC.Infrastructure.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -22,29 +26,43 @@ builder.Services.AddDbContext<HotCatDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 //AddMVC and FluentValidation
-builder.Services.AddControllersWithViews().AddFluentValidation();
+builder.Services.AddControllersWithViews();
+
+#region Servisleri burada tek tek eklemek yerinde IOC Container ile DependencyResolver içerisinde verilmiþtir
+//builder.Services.AddFluentValidation();
 //AddTransient
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<IDepartmentService, DepartmentService>();
-builder.Services.AddTransient<IProductService, ProductService>();
-builder.Services.AddTransient<ISubCategoryService, SubCategoryService>();
-builder.Services.AddTransient<ICategoryService, CategoryService>();
-builder.Services.AddTransient<IEmployeeService, EmployeeService>();
-builder.Services.AddTransient<IOrderService, OrderService>();
-builder.Services.AddTransient<IOrderDetailService, OrderDetailService>();
-builder.Services.AddTransient<IAppUserService, AppUserService>();
-builder.Services.AddTransient<IRoleService, RoleService>();
+//builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+//builder.Services.AddTransient<IDepartmentService, DepartmentService>();
+//builder.Services.AddTransient<IProductService, ProductService>();
+//builder.Services.AddTransient<ISubCategoryService, SubCategoryService>();
+//builder.Services.AddTransient<ICategoryService, CategoryService>();
+//builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+//builder.Services.AddTransient<IOrderService, OrderService>();
+//builder.Services.AddTransient<IOrderDetailService, OrderDetailService>();
+//builder.Services.AddTransient<IAppUserService, AppUserService>();
+//builder.Services.AddTransient<IRoleService, RoleService>();
 
 //AutoMapper
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+//builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 //Mapperconfig
-var mapperConfig = new MapperConfiguration(cfg =>
+//var mapperConfig = new MapperConfiguration(cfg =>
+//{
+//    cfg.AddProfile(new Mapping());
+//});
+
+//builder.Services.AddSingleton(mapperConfig.CreateMapper());
+
+//DependencyResolver
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Services.AddDependencyResolver((IConfiguration)builder.Configuration, new ICoreModule[]
 {
-    cfg.AddProfile(new Mapping());
+    new CoreModule()
 });
 
-builder.Services.AddSingleton(mapperConfig.CreateMapper());
+builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new DependencyResolver()));
+#endregion
 
 builder.Services.AddIdentity<AppUser, AppUserRole>().AddEntityFrameworkStores<HotCatDbContext>().AddDefaultTokenProviders();
 //builder.Services.AddDefaultIdentity<AppUser>().AddEntityFrameworkStores<HotCatDbContext>();
@@ -85,16 +103,7 @@ builder.Services.AddSession(x =>
     
 });
 
-//DependencyResolver
 
-//static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-//.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-//.ConfigureContainer<ContainerBuilder>(builder =>
-//{
-//    builder.RegisterModule(new DependencyResolver());
-//});
-
-//CreateHostBuilder(args).Build();
 
 var app = builder.Build();
 

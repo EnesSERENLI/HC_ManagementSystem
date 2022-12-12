@@ -18,7 +18,7 @@ namespace HC.Application.InversionOfControl
 {
     public class DependencyResolver : Module
     {
-        protected override void Load(ContainerBuilder builder) //bu çalışmıyor bakıcam.
+        protected override void Load(ContainerBuilder builder)
         {
             #region UnitOfWork
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
